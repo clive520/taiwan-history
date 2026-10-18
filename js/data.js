@@ -204,11 +204,20 @@ const TAIWAN_HISTORY_DATA = [
       "locationName": "臺南安平鹿耳門"
     },
     "figures": [
-      "鄭成功",
-      "揆一 (Frederik Coyett)"
+      "鄭成功 (Koxinga)",
+      "揆一 (Frederick Coyett)",
+      "通事何斌",
+      "拔隊長馬德夫",
+      "陳澤提督"
     ],
-    "summary": "奇襲鹿耳門水道登陸、揆一孤注堅守熱蘭遮城九個月攻防戰，以及荷蘭在臺三十八年統治正式畫下句點。",
-    "status": "planned",
+    "summary": "奇襲鹿耳門水道登陸、北線尾海陸遭遇戰、揆一孤注堅守熱蘭遮城九個月攻防戰，以及荷蘭在臺三十八年統治正式畫下句點。",
+    "status": "published",
+    "bannerImage": "assets/images/ch07/ch07_hero_banner.jpg",
+    "youtube": "zzdTcyMWc0g",
+    "podcastYoutube": "8pEU0k1p158",
+    "notebooklm": "https://notebook.google.com/notebook/c3127091-0bff-4fea-be05-93089cfaeeb1",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch07_podcast_deepdive.m4a",
+    "srtFile": "第07章_決戰大員九個月_說明影片.srt",
     "file": "第07章_決戰大員九個月_鄭成功驅荷復臺與熱蘭遮城大圍城.md",
     "videoSchedule": "2026-11-01 17:30",
     "podcastSchedule": "2026-11-01 19:30"
