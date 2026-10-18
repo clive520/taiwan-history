@@ -163,7 +163,66 @@ code, pre {
   max-width: 100%;
   overflow-x: auto;
   border-collapse: collapse;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+.dark .markdown-body table {
+  border-color: #334155;
+}
+
+.markdown-body th {
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #cbd5e1;
+  border-right: 1px solid #e2e8f0;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.dark .markdown-body th {
+  background-color: #1e293b;
+  color: #f8fafc;
+  border-bottom-color: #475569;
+  border-right-color: #334155;
+}
+
+.markdown-body td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  font-size: 0.925rem;
+  line-height: 1.6;
+}
+
+.dark .markdown-body td {
+  border-bottom-color: #334155;
+  border-right-color: #334155;
+}
+
+.markdown-body th:last-child,
+.markdown-body td:last-child {
+  border-right: none;
+}
+
+.markdown-body tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.dark .markdown-body tr:nth-child(even) {
+  background-color: rgba(30, 41, 59, 0.4);
+}
+
+.markdown-body tr:hover {
+  background-color: #f1f5f9;
+}
+
+.dark .markdown-body tr:hover {
+  background-color: rgba(51, 65, 85, 0.6);
 }
 
 /* 全域水平防捲動溢出保護 */
