@@ -31,6 +31,46 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* 全域防水平溢出捲動（徹底防止網頁左右晃動） */
+    html, body {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+      box-sizing: border-box;
+    }
+    .markdown-body {
+      overflow-wrap: break-word !important;
+      word-break: break-word !important;
+      word-wrap: break-word !important;
+    }
+    .markdown-body pre {
+      white-space: pre-wrap !important; /* 自動折行，絕不撐開畫面 */
+      word-break: break-all !important;
+      overflow-wrap: break-word !important;
+      overflow-x: auto !important;
+      max-width: 100% !important;
+      box-sizing: border-box;
+    }
+    .markdown-body code {
+      word-break: break-all !important;
+      overflow-wrap: break-word !important;
+      font-size: 0.875em;
+    }
+    .markdown-body table {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+    }
+    .markdown-body img {
+      max-width: 100% !important;
+      height: auto !important;
+      border-radius: 0.75rem;
+      display: block;
+    }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
 
@@ -78,6 +118,28 @@
         </video>
         <iframe id="youtubeIframe" class="hidden w-full h-full" frameborder="0" allowfullscreen></iframe>
       </div>
+
+      <!-- 影片下方詳細解說欄 -->
+      <div id="videoCaptionBar" class="hidden p-4 sm:p-5 bg-slate-800/95 border-t border-slate-700/60 text-slate-200">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+              <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
+              <span>7 分鐘核心重點解說影片</span>
+            </span>
+            <span class="text-xs text-slate-400 hidden sm:inline">一手史料考證 ＋ 影視級字幕</span>
+          </div>
+          <div id="videoScheduleBadge" class="inline-flex items-center gap-1.5 text-xs text-amber-300 font-medium bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20">
+            <i data-lucide="calendar" class="w-3 h-3"></i>
+            <span id="videoScheduleText">YouTube 排程首播：2026-10-26 17:30</span>
+          </div>
+        </div>
+        <p id="videoSummaryDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          本影片為《臺灣史》第 01 章官方重點精華解說，由 Google NotebookLM 深度整合一手考古文獻與歷史考證資料產出。影片以沉浸式歷史敘事，快速導讀末次冰盛期臺灣海峽陸橋大遷徙、臺東長濱八仙洞海蝕洞穴生活、單面礫石砍砸器工藝，以及 2015 年碳十四定年逆轉「左鎮人」迷思的重大科學求真歷程。
+        </p>
+      </div>
+
+      <!-- 雙人對談播客區塊 -->
       <div id="audioWrapper" class="hidden p-4 bg-slate-800/90 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-700/60">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
@@ -98,6 +160,20 @@
       </div>
     </div>
 
+    <!-- 精裝封面插圖卡 (Hardcover Hero Cover) -->
+    <figure id="articleCoverContainer" class="hidden mb-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 bg-slate-900 shadow-md">
+      <div class="relative w-full aspect-[16/9] max-h-[480px] overflow-hidden bg-slate-950">
+        <img id="articleCoverImg" src="" alt="章節精裝封面概念復原圖" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent"></div>
+        <div class="absolute bottom-4 left-5 right-5 text-white">
+          <span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500/80 text-white backdrop-blur-sm mb-1.5">
+            精裝歷史概念復原圖 (Hardcover)
+          </span>
+          <p id="articleCoverCaption" class="text-xs sm:text-sm font-medium text-slate-200 line-clamp-1"></p>
+        </div>
+      </div>
+    </figure>
+
     <!-- 載入中動畫 -->
     <div id="loadingIndicator" class="flex flex-col items-center justify-center py-20 space-y-4">
       <div class="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
@@ -117,7 +193,7 @@
     </div>
 
     <!-- 文章渲染主體 -->
-    <article id="articleContent" class="hidden markdown-body bg-white dark:bg-slate-900 p-6 sm:p-10 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-colors">
+    <article id="articleContent" class="hidden markdown-body bg-white dark:bg-slate-900 p-6 sm:p-10 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-colors overflow-hidden">
       <!-- Markdown 將動態解析於此 -->
     </article>
 
@@ -178,7 +254,7 @@
         document.getElementById('breadcrumbTitle').textContent = matchedTopic.title;
         document.title = `${matchedTopic.title} | 臺灣史數位文庫`;
 
-        // 檢查多媒體影音配置
+        // 檢查多媒體影音與精裝封面配置
         setupMediaPlayers(matchedTopic);
       } else {
         const parts = filePath.split('/');
@@ -193,7 +269,12 @@
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const markdown = await response.text();
+        let markdown = await response.text();
+
+        // 1. 自動校正 Markdown 內圖片路徑：將 ../assets/ 轉為 assets/
+        markdown = markdown.replace(/\(\.\.\/assets\//g, '(assets/');
+        markdown = markdown.replace(/src="\.\.\/assets\//g, 'src="assets/');
+        markdown = markdown.replace(/href="\.\.\/assets\//g, 'href="assets/');
 
         const html = marked.parse(markdown);
         const articleEl = document.getElementById('articleContent');
@@ -215,8 +296,25 @@
       const localVideo = document.getElementById('localVideoPlayer');
       const youtubeIframe = document.getElementById('youtubeIframe');
       const localAudio = document.getElementById('localAudioPlayer');
+      const videoCaptionBar = document.getElementById('videoCaptionBar');
+      const videoSummaryDesc = document.getElementById('videoSummaryDesc');
+      const videoScheduleBadge = document.getElementById('videoScheduleBadge');
+      const videoScheduleText = document.getElementById('videoScheduleText');
       let hasMedia = false;
 
+      // 1. 設定精裝封面圖卡 (Hardcover)
+      const coverContainer = document.getElementById('articleCoverContainer');
+      const coverImg = document.getElementById('articleCoverImg');
+      const coverCaption = document.getElementById('articleCoverCaption');
+      if (topic.bannerImage) {
+        coverImg.src = topic.bannerImage;
+        coverCaption.textContent = `${topic.title}——${topic.subtitle}`;
+        coverContainer.classList.remove('hidden');
+      } else {
+        coverContainer.classList.add('hidden');
+      }
+
+      // 2. 影片設定與說明文字
       if (topic.youtube) {
         let embedUrl = topic.youtube.trim();
         if (!embedUrl.startsWith('http')) {
@@ -229,6 +327,7 @@
         youtubeIframe.src = embedUrl;
         youtubeIframe.classList.remove('hidden');
         videoWrapper.classList.remove('hidden');
+        videoCaptionBar.classList.remove('hidden');
         hasMedia = true;
       } else if (topic.videoFile) {
         localVideo.src = topic.videoFile.startsWith('http') ? topic.videoFile : `${topic.periodFolder}/${topic.videoFile}`;
@@ -237,9 +336,21 @@
         }
         localVideo.classList.remove('hidden');
         videoWrapper.classList.remove('hidden');
+        videoCaptionBar.classList.remove('hidden');
         hasMedia = true;
       }
 
+      // 注入影片文字說明與排程
+      if (topic.summary) {
+        videoSummaryDesc.textContent = topic.summary;
+      }
+      if (topic.chapterNo === '01') {
+        videoScheduleText.textContent = 'YouTube 排程首播：2026-10-26 17:30';
+      } else if (topic.chapterNo === '02') {
+        videoScheduleText.textContent = 'YouTube 排程首播：2026-10-27 17:30';
+      }
+
+      // 3. 雙人對談播客音訊設定
       if (topic.audioFile) {
         localAudio.src = topic.audioFile.startsWith('http') ? topic.audioFile : `${topic.periodFolder}/${topic.audioFile}`;
         document.getElementById('audioTitle').textContent = `${topic.title} - 深度雙人對談播客`;
@@ -257,6 +368,7 @@
 
       if (hasMedia) {
         container.classList.remove('hidden');
+        lucide.createIcons();
       }
     }
 
