@@ -41,8 +41,8 @@ const TAIWAN_HISTORY_DATA = [
     },
     "figures": ["彼得·貝爾伍德", "白樂思", "南島航海家"],
     "summary": "全球南島語系 10 個一級分支中 9 個在臺灣；大坌坑粗繩紋陶、卑南玉器海上三千公里貿易網絡與十三行煉鐵作坊，印證臺灣作為太平洋航海大擴散原鄉之深遠地位。",
-    "status": "planned",
-    "bannerImage": "",
+    "status": "published",
+    "bannerImage": "assets/images/ch02/ch02_hero_banner.jpg",
     "youtube": "",
     "file": "第02章_大海是唯一的路徑_南島語族的原鄉假說與跨太平洋的獨木舟.md"
   },
