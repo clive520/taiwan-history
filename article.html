@@ -148,7 +148,7 @@
           </div>
         </div>
         <div class="flex items-center gap-3 w-full sm:w-auto flex-grow justify-end">
-          <audio id="localAudioPlayer" controls class="w-full sm:w-auto flex-grow max-w-md"></audio>
+          <audio id="localAudioPlayer" controls preload="metadata" class="w-full sm:w-auto flex-grow max-w-md"></audio>
           <a id="podcastYoutubeLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg bg-red-600/90 hover:bg-red-600 text-white transition-all shadow-sm">
             <i data-lucide="youtube" class="w-4 h-4"></i>
             <span>YouTube 播客</span>
@@ -334,10 +334,14 @@
       if (topic.summary) {
         videoSummaryDesc.textContent = topic.summary;
       }
-      if (topic.chapterNo === '01') {
-        videoScheduleText.textContent = 'YouTube 排程首播：2026-10-26 17:30';
-      } else if (topic.chapterNo === '02') {
-        videoScheduleText.textContent = 'YouTube 排程首播：2026-10-27 17:30';
+      const scheduleMap = {
+        '01': 'YouTube 排程首播：2026-10-26 17:30',
+        '02': 'YouTube 排程首播：2026-10-27 17:30',
+        '03': 'YouTube 排程首播：2026-10-28 17:30',
+        '04': 'YouTube 排程首播：2026-10-29 17:30'
+      };
+      if (scheduleMap[topic.chapterNo]) {
+        videoScheduleText.textContent = scheduleMap[topic.chapterNo];
       }
 
       // 3. 雙人對談播客音訊設定

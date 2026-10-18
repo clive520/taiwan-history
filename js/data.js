@@ -48,7 +48,7 @@ const TAIWAN_HISTORY_DATA = [
     "podcastYoutube": "nCPvm8Wm3bc",
     "notebooklm": "https://notebook.google.com/notebook/cfe2bb5a-8730-4d61-a162-5637634d849c",
     "videoFile": "https://youtu.be/7UHNACoGMps",
-    "audioFile": "第02章_大海是唯一的路徑_雙人對談.m4a",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch02_podcast_deepdive.m4a",
     "srtFile": "第02章_大海是唯一的路徑_說明影片.srt",
     "file": "第02章_大海是唯一的路徑_南島語族的原鄉假說與跨太平洋的獨木舟.md"
   },
@@ -73,7 +73,7 @@ const TAIWAN_HISTORY_DATA = [
     "youtube": "zUdGDyUpf9g",
     "podcastYoutube": "C3thxaXg7Fc",
     "notebooklm": "https://notebook.google.com/notebook/ee42169d-1eeb-4a2f-a2df-2fc81a758348",
-    "audioFile": "第03章_部落聯盟與土地精靈_雙人對談.m4a",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch03_podcast_deepdive.m4a",
     "srtFile": "第03章_部落聯盟與土地精靈_說明影片.srt",
     "file": "第03章_部落聯盟與土地精靈_原住民族的社會秩序神話祭儀與獵場智慧.md"
   },
@@ -98,7 +98,7 @@ const TAIWAN_HISTORY_DATA = [
     "youtube": "F9PmvVUY7no",
     "podcastYoutube": "-NUWwkAHEPA",
     "notebooklm": "https://notebook.google.com/notebook/1a1e5998-4182-485f-927a-fe0fcc5f7259",
-    "audioFile": "第04章_熱蘭遮的紅毛城旗_雙人對談.m4a",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch04_podcast_deepdive.m4a",
     "srtFile": "第04章_熱蘭遮的紅毛城旗_說明影片.srt",
     "file": "第04章_熱蘭遮的紅毛城旗_荷蘭東印度公司與大員貿易霸權.md"
   },
