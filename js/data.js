@@ -93,7 +93,13 @@ const TAIWAN_HISTORY_DATA = [
     },
     "figures": ["宋克 (Martinus Sonck)", "長老教會宣教士", "濱田彌兵衛"],
     "summary": "荷蘭東印度公司如何將大員打造成東亞轉口貿易樞紐？鹿皮、砂糖、白銀貿易與基督教長老教會羅馬字拼音（新港文書）的深遠影響。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch04/ch04_hero_banner.jpg",
+    "youtube": "F9PmvVUY7no",
+    "podcastYoutube": "-NUWwkAHEPA",
+    "notebooklm": "https://notebook.google.com/notebook/1a1e5998-4182-485f-927a-fe0fcc5f7259",
+    "audioFile": "第04章_熱蘭遮的紅毛城旗_雙人對談.m4a",
+    "srtFile": "第04章_熱蘭遮的紅毛城旗_說明影片.srt",
     "file": "第04章_熱蘭遮的紅毛城旗_荷蘭東印度公司與大員貿易霸權.md"
   },
   {
