@@ -19,3 +19,9 @@ temp_*.txt
 # 大型音訊與影音檔（避免 Git 倉庫超過容量限制，影音一律託管於 YouTube 與 Releases/CDN）
 *.mp4
 *.m4a
+
+# Google OAuth 憑證與 Token 檔（安全防護）
+client_secret*.json
+*token*.json
+*.uploaded
+

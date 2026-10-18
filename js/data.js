@@ -18,9 +18,9 @@ const TAIWAN_HISTORY_DATA = [
     "summary": "從冰河期臺灣海峽成陸的大陸哺乳動物遷徙，到東海岸海蝕洞穴中敲擊出的第一聲石器脆響；科學定年逆轉「左鎮人」迷思，確立長濱文化作為臺灣數萬年文明破曉的真正基石。",
     "status": "published",
     "bannerImage": "assets/images/ch01/ch01_hero_banner.jpg",
-    "youtube": "",
+    "youtube": "5fKIcNMT_jI",
     "notebooklm": "https://notebook.google.com/notebook/ec4c75cc-47e5-42d8-821f-11455131d55d",
-    "videoFile": "",
+    "videoFile": "https://youtu.be/5fKIcNMT_jI",
     "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch01_podcast_deepdive.m4a",
     "srtFile": "第01章_黑潮上的遠古足跡_說明影片.srt",
     "file": "第01章_黑潮上的遠古足跡_長濱文化左鎮人與舊石器時代的曙光.md"

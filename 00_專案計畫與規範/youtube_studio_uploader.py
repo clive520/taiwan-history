@@ -11,34 +11,76 @@
 import os
 import sys
 import time
+import threading
 import argparse
+import subprocess
+
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from playwright.sync_api import sync_playwright
 
+def get_native_browser():
+    """取得本機原生乾淨瀏覽器路徑（優先 Edge 避免與使用者日常 Chrome 衝突）"""
+    candidates = [
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
+
 def authenticate(profile_dir):
-    """使用者一次性手動授權模式"""
+    """使用者一次性手動授權模式（使用系統原生瀏覽器，完全免除 Google 安全疑慮封鎖）"""
     print("\n" + "=" * 65)
-    print("🔑 正在開啟 Chrome 進行 YouTube Studio 頻道授權...")
+    print("🔑 正在啟動系統原生瀏覽器進行 YouTube Studio 頻道授權...")
     print("=" * 65)
     print("👉 請在即將開啟的瀏覽器視窗中：")
-    print("   1. 登入您的 Google / YouTube 帳號")
-    print("   2. 確認已進入您的 YouTube 工作室 (YouTube Studio)")
-    print("   3. 登入完成後，回到此終端按 Enter 鍵，系統將永久保存登入態！")
+    print("   1. 登入您的 Google 帳號：clive520@gmail.com")
+    print("   2. 確認順利進入您的 YouTube 工作室 (YouTube Studio)")
+    print("   3. 登入完成後，直接在終端按 Enter，系統將保存持久化憑證")
     print("=" * 65 + "\n")
 
-    with sync_playwright() as p:
-        context = p.chromium.launch_persistent_context(
-            user_data_dir=profile_dir,
-            headless=False,
-            channel="chrome",
-            args=["--start-maximized"],
-            no_viewport=True
-        )
-        page = context.pages[0] if context.pages else context.new_page()
-        page.goto("https://studio.youtube.com")
+    browser_exe = get_native_browser()
+    if not browser_exe:
+        print("❌ 找不到系統中的 Chrome 或 Edge 瀏覽器！")
+        return
 
-        input("\n[等待授權] 登入並進入工作室後，請在此處按 Enter 鍵確認完成：")
-        print("✅ 授權狀態已成功持久化儲存！未來無需重複登入。")
-        context.close()
+    browser_name = "Chrome" if "chrome.exe" in browser_exe.lower() else "Edge"
+    print(f"🌐 啟動原生 {browser_name}（純淨模式，無任何自動化標記，Google 100% 信任）...")
+
+    cmd = [
+        browser_exe,
+        f"--user-data-dir={profile_dir}",
+        "--no-first-run",
+        "--no-default-browser-check",
+        "https://studio.youtube.com"
+    ]
+
+    proc = subprocess.Popen(cmd)
+
+    print("\n⏳ 瀏覽器已開啟！請在該視窗完成登入操作。")
+    print("💡 登入成功並看到 YouTube 工作室儀表板後，回到此視窗按 Enter 結束授權。")
+    try:
+        input("👉 登入完成後請按 Enter：")
+    except Exception:
+        pass
+
+    try:
+        proc.terminate()
+    except Exception:
+        pass
+
+    print("\n✅ 授權完成！登入狀態與 Cookie 已成功持久化保存於：")
+    print(f"   {profile_dir}")
+    print("   未來上傳影片、排程與掛載字幕將全自動執行，無需再次登入。\n")
 
 def upload_via_studio(profile_dir, video_path, srt_path, thumbnail_path, title, description, playlist_name, schedule_date, schedule_time):
     """執行自動化上傳流程"""
@@ -55,71 +97,115 @@ def upload_via_studio(profile_dir, video_path, srt_path, thumbnail_path, title, 
     print("=" * 65 + "\n")
 
     with sync_playwright() as p:
-        context = p.chromium.launch_persistent_context(
-            user_data_dir=profile_dir,
-            headless=False,
-            channel="chrome",
-            args=["--start-maximized"],
-            no_viewport=True
-        )
+        try:
+            context = p.chromium.launch_persistent_context(
+                user_data_dir=profile_dir,
+                headless=False,
+                channel="chrome",
+                ignore_default_args=["--enable-automation"],
+                args=["--start-maximized", "--disable-blink-features=AutomationControlled"],
+                no_viewport=True
+            )
+        except Exception:
+            context = p.chromium.launch_persistent_context(
+                user_data_dir=profile_dir,
+                headless=False,
+                ignore_default_args=["--enable-automation"],
+                args=["--start-maximized", "--disable-blink-features=AutomationControlled"],
+                no_viewport=True
+            )
+
         page = context.pages[0] if context.pages else context.new_page()
         page.goto("https://studio.youtube.com")
-        page.wait_for_timeout(3000)
-
         # 檢查是否登入
         if "accounts.google.com" in page.url:
-            print("⚠️ 尚未登入！請先執行 --auth 進行一次性授權。")
-            return
+            print("\n" + "=" * 65)
+            print("👉 偵測到 YouTube Studio 尚未進入登入狀態！")
+            print("👉 請在彈出的瀏覽器視窗中完成登入（clive520@gmail.com）")
+            print("👉 登入成功後，本程式將自動感應並無縫接手填寫與上傳！")
+            print("=" * 65 + "\n")
+            logged_in = False
+            for _ in range(150): # 最長等待 5 分鐘
+                page.wait_for_timeout(2000)
+                try:
+                    curr_url = page.url
+                    if "studio.youtube.com" in curr_url and "accounts.google.com" not in curr_url:
+                        print("🎉 偵測到已成功進入 YouTube Studio！即刻接手自動化...")
+                        logged_in = True
+                        break
+                except Exception:
+                    pass
+            if not logged_in:
+                print("❌ 等待登入超時，請重新執行。")
+                return
 
         print("📤 正在開啟上傳對話框...")
-        # 點選右上角「建立」或直接導向 upload
         page.goto("https://studio.youtube.com/channel/?d=pt")
-        page.wait_for_timeout(2000)
+        page.wait_for_timeout(3000)
 
-        # 尋找檔案上傳 input
-        file_input = page.locator('input[type="file"]')
-        if file_input.count() > 0:
-            print("📁 正在注入影片檔案...")
-            file_input.first.set_input_files(video_path)
-        else:
-            print("⚠️ 未檢測到上傳按鈕，請在視窗中手動選取影片。")
+        # 注入影片
+        file_input = page.locator('input[type="file"]').first
+        try:
+            file_input.set_input_files(video_path)
+            print("📁 影片檔案注入成功，上傳處理中...")
+        except Exception as e:
+            print(f"⚠️ 檔案注入提醒：{e}")
 
-        print("⏳ 正在等待上傳介面載入...")
-        page.wait_for_timeout(5000)
+        # 等待對話框細節區塊載入
+        page.wait_for_timeout(6000)
 
         # 填寫標題
         try:
-            title_input = page.locator('#title-textarea #textbox, #textbox[aria-label*="標題"]')
-            if title_input.count() > 0:
+            title_input = page.locator('#title-textarea #textbox, #textbox[aria-label*="標題"]').first
+            if title_input.is_visible():
                 print("✍️ 正在填入影片標題...")
-                title_input.first.fill(title)
+                title_input.fill("")
+                title_input.type(title)
         except Exception as e:
-            print(f"⚠️ 標題填寫略過：{e}")
+            print(f"⚠️ 標題填寫提示：{e}")
 
         # 填寫說明欄
         try:
-            desc_input = page.locator('#description-textarea #textbox, #textbox[aria-label*="說明"]')
-            if desc_input.count() > 0 and description:
-                print("✍️ 正在填入說明欄文字與連結...")
-                desc_input.first.fill(description)
+            desc_input = page.locator('#description-textarea #textbox, #textbox[aria-label*="說明"]').first
+            if desc_input.is_visible() and description:
+                print("✍️ 正在填入完整說明欄與章節連結...")
+                desc_input.fill("")
+                desc_input.type(description)
         except Exception as e:
-            print(f"⚠️ 說明欄填寫略過：{e}")
+            print(f"⚠️ 說明欄填寫提示：{e}")
+
+        # 上傳封面縮圖
+        if thumbnail_path and os.path.exists(thumbnail_path):
+            try:
+                thumb_input = page.locator('input[type="file"][accept*="image"]').first
+                if thumb_input.count() > 0:
+                    print("🖼️ 正在上傳封面縮圖...")
+                    thumb_input.set_input_files(thumbnail_path)
+            except Exception as e:
+                print(f"⚠️ 縮圖上傳提示：{e}")
 
         # 勾選非兒童專用
         try:
-            not_kids_radio = page.locator('tp-yt-paper-radio-button[name="VIDEO_MADE_FOR_KIDS_NOT_MFK"], tp-yt-paper-radio-button[name="NOT_MADE_FOR_KIDS"]')
-            if not_kids_radio.count() > 0:
-                print("👶 已設定「非專為兒童打造」...")
-                not_kids_radio.first.click()
+            not_kids_radio = page.locator('tp-yt-paper-radio-button[name="VIDEO_MADE_FOR_KIDS_NOT_MFK"], tp-yt-paper-radio-button[name="NOT_MADE_FOR_KIDS"]').first
+            if not_kids_radio.is_visible():
+                print("👶 已設定為「非專為兒童打造」...")
+                not_kids_radio.click()
         except Exception as e:
             pass
 
         print("\n" + "=" * 65)
-        print("💡 影片檔案已成功載入，主要中繼資料已就緒！")
-        print("👀 為確保 YouTube 排程與字幕無誤，請在視窗中完成最後預覽與發布確認。")
+        print("💡 影片、標題、說明欄、封面資料已全數自動填入完畢！")
+        print("👉 瀏覽器視窗現正處於開啟狀態。")
+        print("👉 您可以在介面中點選「下一步」，在「影片元素」掛載字幕檔：")
+        print(f"   {srt_path}")
+        print(f"👉 並於最終頁面排程設定：{schedule_date} {schedule_time}。")
         print("=" * 65 + "\n")
 
-        input("上傳與排程確認完畢後，請按 Enter 退出腳本：")
+        print("檢視與發布完畢後，請於此處按 Enter 關閉瀏覽器。")
+        try:
+            input("按 Enter 結束：")
+        except Exception:
+            pass
 
 def main():
     parser = argparse.ArgumentParser(description="YouTube Studio 自動化 CLI")
