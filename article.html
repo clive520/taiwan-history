@@ -126,9 +126,9 @@
             </span>
             <span class="text-xs text-slate-400 hidden sm:inline">一手史料考證 ＋ 影視級字幕</span>
           </div>
-          <div id="videoScheduleBadge" class="inline-flex items-center gap-1.5 text-xs text-amber-300 font-medium bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20">
+          <div id="videoScheduleBadge" class="hidden inline-flex items-center gap-1.5 text-xs text-amber-300 font-medium bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20">
             <i data-lucide="calendar" class="w-3 h-3"></i>
-            <span id="videoScheduleText">YouTube 排程首播：2026-10-26 17:30</span>
+            <span id="videoScheduleText"></span>
           </div>
         </div>
         <p id="videoSummaryDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
@@ -143,7 +143,7 @@
             <i data-lucide="headphones" class="w-5 h-5"></i>
           </div>
           <div>
-            <div class="text-xs text-emerald-400 font-semibold">NotebookLM 雙人深度對談播客</div>
+            <div class="text-xs text-emerald-400 font-semibold" id="podcastSubtitleTag">NotebookLM 雙人深度對談播客</div>
             <div class="text-sm font-bold truncate max-w-[280px] sm:max-w-sm" id="audioTitle">歷史對談音訊</div>
           </div>
         </div>
@@ -334,20 +334,46 @@
       if (topic.summary) {
         videoSummaryDesc.textContent = topic.summary;
       }
-      const scheduleMap = {
-        '01': 'YouTube 排程首播：2026-10-26 17:30',
-        '02': 'YouTube 排程首播：2026-10-27 17:30',
-        '03': 'YouTube 排程首播：2026-10-28 17:30',
-        '04': 'YouTube 排程首播：2026-10-29 17:30'
+      const defaultScheduleMap = {
+        '01': '2026-10-26 17:30',
+        '02': '2026-10-27 17:30',
+        '03': '2026-10-28 17:30',
+        '04': '2026-10-29 17:30',
+        '05': '2026-10-30 17:30',
+        '06': '2026-10-31 17:30',
+        '07': '2026-11-01 17:30',
+        '08': '2026-11-02 17:30',
+        '09': '2026-11-03 17:30',
+        '10': '2026-11-04 17:30',
+        '11': '2026-11-05 17:30',
+        '12': '2026-11-06 17:30',
+        '13': '2026-11-07 17:30',
+        '14': '2026-11-08 17:30',
+        '15': '2026-11-09 17:30',
+        '16': '2026-11-10 17:30',
+        '17': '2026-11-11 17:30',
+        '18': '2026-11-12 17:30'
       };
-      if (scheduleMap[topic.chapterNo]) {
-        videoScheduleText.textContent = scheduleMap[topic.chapterNo];
+
+      const schedTime = topic.videoSchedule || defaultScheduleMap[topic.chapterNo];
+      if (schedTime) {
+        videoScheduleText.textContent = `YouTube 排程首播：${schedTime}`;
+        videoScheduleBadge.classList.remove('hidden');
+      } else {
+        videoScheduleBadge.classList.add('hidden');
       }
 
       // 3. 雙人對談播客音訊設定
       if (topic.audioFile) {
         localAudio.src = topic.audioFile.startsWith('http') ? topic.audioFile : `${topic.periodFolder}/${topic.audioFile}`;
         document.getElementById('audioTitle').textContent = `${topic.title} - 深度雙人對談播客`;
+
+        const podSched = topic.podcastSchedule || (schedTime ? schedTime.replace('17:30', '19:30') : null);
+        const podSubtitle = document.getElementById('podcastSubtitleTag');
+        if (podSubtitle && podSched) {
+          podSubtitle.innerHTML = `NotebookLM 雙人深度對談播客 <span class="text-amber-300 font-normal ml-2">YouTube 首播：${podSched}</span>`;
+        }
+
         audioWrapper.classList.remove('hidden');
         hasMedia = true;
 
@@ -355,6 +381,9 @@
           const podcastBtn = document.getElementById('podcastYoutubeLink');
           if (podcastBtn) {
             podcastBtn.href = topic.podcastYoutube.startsWith('http') ? topic.podcastYoutube : `https://youtu.be/${topic.podcastYoutube}`;
+            if (podSched) {
+              podcastBtn.title = `YouTube 播客排程首播：${podSched}`;
+            }
             podcastBtn.classList.remove('hidden');
           }
         }
