@@ -20,8 +20,8 @@ const TAIWAN_HISTORY_DATA = [
     "bannerImage": "assets/images/ch01/ch01_hero_banner.jpg",
     "youtube": "",
     "notebooklm": "https://notebook.google.com/notebook/ec4c75cc-47e5-42d8-821f-11455131d55d",
-    "videoFile": "第01章_黑潮上的遠古足跡_說明影片.mp4",
-    "audioFile": "第01章_黑潮上的遠古足跡_雙人對談.m4a",
+    "videoFile": "",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch01_podcast_deepdive.m4a",
     "srtFile": "第01章_黑潮上的遠古足跡_說明影片.srt",
     "file": "第01章_黑潮上的遠古足跡_長濱文化左鎮人與舊石器時代的曙光.md"
   },

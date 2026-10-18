@@ -221,9 +221,9 @@
         videoWrapper.classList.remove('hidden');
         hasMedia = true;
       } else if (topic.videoFile) {
-        localVideo.src = `${topic.periodFolder}/${topic.videoFile}`;
+        localVideo.src = topic.videoFile.startsWith('http') ? topic.videoFile : `${topic.periodFolder}/${topic.videoFile}`;
         if (topic.srtFile) {
-          document.getElementById('videoTrack').src = `${topic.periodFolder}/${topic.srtFile}`;
+          document.getElementById('videoTrack').src = topic.srtFile.startsWith('http') ? topic.srtFile : `${topic.periodFolder}/${topic.srtFile}`;
         }
         localVideo.classList.remove('hidden');
         videoWrapper.classList.remove('hidden');
@@ -231,8 +231,8 @@
       }
 
       if (topic.audioFile) {
-        localAudio.src = `${topic.periodFolder}/${topic.audioFile}`;
-        document.getElementById('audioTitle').textContent = `${topic.title} - 深度解說`;
+        localAudio.src = topic.audioFile.startsWith('http') ? topic.audioFile : `${topic.periodFolder}/${topic.audioFile}`;
+        document.getElementById('audioTitle').textContent = `${topic.title} - 深度雙人對談播客`;
         audioWrapper.classList.remove('hidden');
         hasMedia = true;
       }
