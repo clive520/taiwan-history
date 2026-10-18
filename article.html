@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章閱讀 | 臺灣史數位文庫</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Marked.js for Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- 頂部導航列 -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-slate-200/80 dark:border-slate-800/80">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="flex items-center space-x-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+          <i data-lucide="arrow-left" class="w-4 h-4"></i>
+          <span>返回文庫首頁</span>
+        </a>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button id="themeToggle" aria-label="切換深淺模式" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+        </button>
+
+        <a id="githubEditBtn" href="https://github.com/clive520/taiwan-history" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-medium rounded-lg text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span>在 GitHub 檢視</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 文章主要內容區 -->
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 flex-grow w-full">
+    
+    <!-- 麵包屑導航與狀態 -->
+    <div class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400 mb-6">
+      <a href="index.html" class="hover:text-emerald-500">文庫首頁</a>
+      <span>/</span>
+      <span id="breadcrumbCategory">歷史時期</span>
+      <span>/</span>
+      <span id="breadcrumbTitle" class="text-slate-800 dark:text-slate-200 font-semibold truncate">載入中...</span>
+    </div>
+
+    <!-- 影音播放區塊 (若已生成影片或音訊) -->
+    <div id="mediaPlayerContainer" class="hidden mb-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 bg-slate-900 text-white shadow-lg">
+      <div id="videoWrapper" class="hidden relative aspect-video w-full bg-black">
+        <video id="localVideoPlayer" controls class="w-full h-full object-contain">
+          <track id="videoTrack" label="繁體中文" kind="subtitles" srclang="zh-TW" default>
+        </video>
+        <iframe id="youtubeIframe" class="hidden w-full h-full" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <div id="audioWrapper" class="hidden p-4 bg-slate-800/90 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-700/60">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+            <i data-lucide="headphones" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="text-xs text-emerald-400 font-semibold">NotebookLM 雙人深度對談播客</div>
+            <div class="text-sm font-bold truncate max-w-[280px] sm:max-w-sm" id="audioTitle">歷史對談音訊</div>
+          </div>
+        </div>
+        <audio id="localAudioPlayer" controls class="w-full sm:w-auto flex-grow max-w-md"></audio>
+      </div>
+    </div>
+
+    <!-- 載入中動畫 -->
+    <div id="loadingIndicator" class="flex flex-col items-center justify-center py-20 space-y-4">
+      <div class="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
+      <p class="text-sm text-slate-500">正在調度臺灣歷史文庫檔案...</p>
+    </div>
+
+    <!-- 錯誤提示 -->
+    <div id="errorMessage" class="hidden bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 rounded-2xl p-6 text-center">
+      <div class="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400 flex items-center justify-center mx-auto mb-3">
+        <i data-lucide="alert-circle" class="w-6 h-6"></i>
+      </div>
+      <h3 class="text-base font-bold text-red-900 dark:text-red-200 mb-1">文章檔案尚未建立或無法載入</h3>
+      <p class="text-xs text-red-600 dark:text-red-400 mb-4" id="errorDetail">該主題目前仍在計畫撰寫庫中，即將推出！</p>
+      <a href="index.html" class="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> 返回文庫探索其他主題
+      </a>
+    </div>
+
+    <!-- 文章渲染主體 -->
+    <article id="articleContent" class="hidden markdown-body bg-white dark:bg-slate-900 p-6 sm:p-10 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-colors">
+      <!-- Markdown 將動態解析於此 -->
+    </article>
+
+    <!-- 底部切換上下篇 -->
+    <div id="navigationFooter" class="mt-8 pt-6 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i> 回到專題清單
+      </a>
+      <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-emerald-600">
+        <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i> 回到頂部
+      </button>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-200/80 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 py-6 text-center text-xs text-slate-500">
+    臺灣史專題寫作與數位文庫 &copy; 2026 &bull; Project FormosaChronicles
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script>
+    lucide.createIcons();
+
+    // 深色模式開關
+    const themeToggle = document.getElementById('themeToggle');
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const fileParam = urlParams.get('file');
+    const idParam = urlParams.get('id');
+
+    async function loadArticle() {
+      let filePath = fileParam;
+      let matchedTopic = null;
+
+      if (idParam && typeof TAIWAN_HISTORY_DATA !== 'undefined') {
+        matchedTopic = TAIWAN_HISTORY_DATA.find(t => t.id === idParam);
+        if (matchedTopic) {
+          filePath = `${matchedTopic.periodFolder}/${matchedTopic.file}`;
+        }
+      } else if (fileParam && typeof TAIWAN_HISTORY_DATA !== 'undefined') {
+        matchedTopic = TAIWAN_HISTORY_DATA.find(t => `${t.periodFolder}/${t.file}` === fileParam);
+      }
+
+      if (!filePath) {
+        showError('未指定文章路徑或專題 ID');
+        return;
+      }
+
+      if (matchedTopic) {
+        document.getElementById('breadcrumbCategory').textContent = matchedTopic.periodName;
+        document.getElementById('breadcrumbTitle').textContent = matchedTopic.title;
+        document.title = `${matchedTopic.title} | 臺灣史數位文庫`;
+
+        // 檢查多媒體影音配置
+        setupMediaPlayers(matchedTopic);
+      } else {
+        const parts = filePath.split('/');
+        document.getElementById('breadcrumbTitle').textContent = parts[parts.length - 1].replace('.md', '');
+      }
+
+      const githubBtn = document.getElementById('githubEditBtn');
+      githubBtn.href = `https://github.com/clive520/taiwan-history/blob/main/${filePath}`;
+
+      try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const markdown = await response.text();
+
+        const html = marked.parse(markdown);
+        const articleEl = document.getElementById('articleContent');
+        articleEl.innerHTML = html;
+
+        document.getElementById('loadingIndicator').classList.add('hidden');
+        articleEl.classList.remove('hidden');
+        lucide.createIcons();
+      } catch (err) {
+        console.error('Failed to load markdown file:', err);
+        showError(`檔案 [${filePath}] 尚未寫入或仍在準備中。`);
+      }
+    }
+
+    function setupMediaPlayers(topic) {
+      const container = document.getElementById('mediaPlayerContainer');
+      const videoWrapper = document.getElementById('videoWrapper');
+      const audioWrapper = document.getElementById('audioWrapper');
+      const localVideo = document.getElementById('localVideoPlayer');
+      const youtubeIframe = document.getElementById('youtubeIframe');
+      const localAudio = document.getElementById('localAudioPlayer');
+      let hasMedia = false;
+
+      if (topic.youtube) {
+        let embedUrl = topic.youtube;
+        if (embedUrl.includes('youtu.be/')) {
+          embedUrl = embedUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+        }
+        youtubeIframe.src = embedUrl;
+        youtubeIframe.classList.remove('hidden');
+        videoWrapper.classList.remove('hidden');
+        hasMedia = true;
+      } else if (topic.videoFile) {
+        localVideo.src = `${topic.periodFolder}/${topic.videoFile}`;
+        if (topic.srtFile) {
+          document.getElementById('videoTrack').src = `${topic.periodFolder}/${topic.srtFile}`;
+        }
+        localVideo.classList.remove('hidden');
+        videoWrapper.classList.remove('hidden');
+        hasMedia = true;
+      }
+
+      if (topic.audioFile) {
+        localAudio.src = `${topic.periodFolder}/${topic.audioFile}`;
+        document.getElementById('audioTitle').textContent = `${topic.title} - 深度解說`;
+        audioWrapper.classList.remove('hidden');
+        hasMedia = true;
+      }
+
+      if (hasMedia) {
+        container.classList.remove('hidden');
+      }
+    }
+
+    function showError(msg) {
+      document.getElementById('loadingIndicator').classList.add('hidden');
+      document.getElementById('errorMessage').classList.remove('hidden');
+      if (msg) document.getElementById('errorDetail').textContent = msg;
+      lucide.createIcons();
+    }
+
+    loadArticle();
+  </script>
+</body>
+</html>

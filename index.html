@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>臺灣史數位文庫 | Project FormosaChronicles</title>
+  <meta name="description" content="從史前南島大航海到當代民主與半導體矽島。融合通史編年、時空地圖與影音字幕的新一代臺灣歷史文庫。">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- 頂部導航列 -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-slate-200/80 dark:border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+          <i data-lucide="compass" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <a href="index.html" class="text-lg font-bold tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 bg-clip-text text-transparent">
+            臺灣史 <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 ml-1">FormosaChronicles</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 視角切換器 (Tab Switcher) -->
+      <div class="hidden md:flex items-center bg-slate-200/70 dark:bg-slate-800/70 p-1 rounded-xl text-xs font-medium">
+        <button id="viewGridBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm transition-all">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+          <span>章節目錄</span>
+        </button>
+        <button id="viewTimelineBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+          <span>歷史時間軸</span>
+        </button>
+        <button id="viewMapBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+          <span>臺灣歷史地圖</span>
+        </button>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button id="themeToggle" aria-label="切換深淺模式" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+        </button>
+
+        <a href="https://github.com/clive520/taiwan-history" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 手機版視角切換器 -->
+  <div class="md:hidden flex items-center justify-around bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-2 text-xs font-medium sticky top-16 z-40">
+    <button id="mobileViewGridBtn" class="flex items-center space-x-1 py-1.5 px-3 rounded-lg bg-white dark:bg-slate-800 text-emerald-600 dark:text-emerald-400 font-bold shadow-sm">
+      <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+      <span>目錄</span>
+    </button>
+    <button id="mobileViewTimelineBtn" class="flex items-center space-x-1 py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400">
+      <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+      <span>時間軸</span>
+    </button>
+    <button id="mobileViewMapBtn" class="flex items-center space-x-1 py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400">
+      <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+      <span>地圖</span>
+    </button>
+  </div>
+
+  <!-- Hero 英雄區 -->
+  <section class="relative py-12 md:py-16 overflow-hidden bg-gradient-to-b from-emerald-50/50 via-transparent to-transparent dark:from-slate-900/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100/80 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 mb-6">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        臺灣文明演進時空文庫
+      </div>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-slate-900 dark:text-white">
+        穿梭三萬年的島嶼記憶 <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-600">18 個歷史轉折點</span>
+      </h1>
+      <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+        從海峽陸橋的古生物猛獸長征，到大員熱蘭遮的紅毛城旗；從黑水溝的墾荒血淚，到當代世界舞台的民主與半導體矽盾。探索臺灣如何成為大洋與世界交匯的樞紐。
+      </p>
+
+      <div class="max-w-xl mx-auto relative">
+        <div class="relative flex items-center">
+          <i data-lucide="search" class="w-5 h-5 text-slate-400 absolute left-4 pointer-events-none"></i>
+          <input type="text" id="searchInput" placeholder="搜尋歷史事件、人物、地點或關鍵字（例如：八仙洞、鄭成功、劉銘傳...）" 
+                 class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm transition-all text-sm sm:text-base">
+          <button id="clearSearch" class="hidden absolute right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主內容區 -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
+    <!-- 時期分類 Tabs -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none border-b border-slate-200/60 dark:border-slate-800/60" id="periodTabs"></div>
+
+    <!-- 視圖一：章節卡片目錄 -->
+    <section id="gridSection">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6 text-sm text-slate-500 dark:text-slate-400">
+        <div id="resultsCount" class="font-medium">載入章節中...</div>
+        <div class="flex items-center gap-4 text-xs">
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> 已發布</span>
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> 撰寫中</span>
+          <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600"></span> 計畫庫</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="chaptersGrid"></div>
+    </section>
+
+    <!-- 視圖二：歷史時間軸 -->
+    <section id="timelineSection" class="hidden">
+      <div class="text-center mb-10">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">臺灣歷史編年時間軸</h2>
+        <p class="text-sm text-slate-500">由遠古舊石器時代至當代高科技矽島的歲月長流</p>
+      </div>
+      <div class="relative max-w-4xl mx-auto py-6" id="timelineContainer">
+        <!-- 垂直時間軸主線 -->
+        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-emerald-200 dark:bg-emerald-900/60 transform md:-translate-x-1/2"></div>
+        <div id="timelineList" class="space-y-8"></div>
+      </div>
+    </section>
+
+    <!-- 視圖三：臺灣歷史地圖 -->
+    <section id="mapSection" class="hidden">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">臺灣歷史地理探索地圖</h2>
+        <p class="text-sm text-slate-500">點擊地圖上的各時期標記點，探索歷史發生的地理坐標與現場故事</p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div id="mapContainer"></div>
+      </div>
+    </section>
+
+    <!-- 空搜尋狀態 -->
+    <div id="emptyState" class="hidden text-center py-16">
+      <div class="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="search-x" class="w-8 h-8"></i>
+      </div>
+      <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-1">找不到相符的歷史專題</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">請嘗試更換關鍵字或點擊全部時期重設篩選</p>
+    </div>
+  </main>
+
+  <!-- 頁腳 -->
+  <footer class="border-t border-slate-200/80 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="book-open" class="w-4 h-4 text-emerald-500"></i>
+        <span>臺灣史專題寫作與數位文庫 &copy; 2026</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="article.html?file=00_專案計畫與規範/臺灣史專題寫作與數位文庫計畫書.md" class="hover:text-emerald-500 transition-colors">查看完整計畫書</a>
+        <span>&bull;</span>
+        <a href="https://github.com/clive520/taiwan-history" target="_blank" class="hover:text-emerald-500 transition-colors">開源協作與文獻校核</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

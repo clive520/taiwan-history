@@ -1,0 +1,21 @@
+# Python 快取與環境
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 系統快取
+.DS_Store
+Thumbs.db
+
+# 瀏覽器自動化使用者設定檔
+.browser-profile/
+
+# Whisper 語音轉錄中繼暫存檔
+whisper_words*.json
+*_raw_segments.txt
+temp_*.txt
+
+# 大型音訊與影音檔（避免 Git 倉庫超過容量限制，影音一律託管於 YouTube 與 Releases/CDN）
+*.mp4
+*.m4a
