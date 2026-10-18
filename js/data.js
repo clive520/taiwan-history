@@ -68,9 +68,13 @@ const TAIWAN_HISTORY_DATA = [
     },
     "figures": ["Camachat Asing（甘馬轄·阿興）", "各族頭目與祭司"],
     "summary": "大肚王國跨部落聯邦體系、排灣魯凱世襲階層與石板家屋、阿美卑南母系年齡階級、泰雅族 Gaga 祖訓與布農族八部合音，展現大航海前夕臺灣本土豐富多元的社會組織。",
-    "status": "planned",
-    "bannerImage": "",
-    "youtube": "",
+    "status": "published",
+    "bannerImage": "assets/images/ch03/ch03_hero_banner.jpg",
+    "youtube": "zUdGDyUpf9g",
+    "podcastYoutube": "C3thxaXg7Fc",
+    "notebooklm": "https://notebook.google.com/notebook/ee42169d-1eeb-4a2f-a2df-2fc81a758348",
+    "audioFile": "第03章_部落聯盟與土地精靈_雙人對談.m4a",
+    "srtFile": "第03章_部落聯盟與土地精靈_說明影片.srt",
     "file": "第03章_部落聯盟與土地精靈_原住民族的社會秩序神話祭儀與獵場智慧.md"
   },
   {
