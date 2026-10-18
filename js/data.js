@@ -172,12 +172,19 @@ const TAIWAN_HISTORY_DATA = [
       "locationName": "臺南赤崁樓與油車行"
     },
     "figures": [
-      "郭懷一",
-      "荷蘭總督長官",
-      "原住民盟軍"
+      "郭懷一 (Quo-qua)",
+      "費爾勃格 (Nicolas Verburg)",
+      "揆一 (Frederick Coyett)",
+      "西拉雅盟軍戰士"
     ],
     "summary": "苛捐人頭稅引爆的農民起義，郭懷一誓師反荷，漢荷原三方角力與殘酷鎮壓，寫下早期移民悲壯拓墾史頁。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch06/ch06_hero_banner.jpg",
+    "youtube": "qdRyKFYwhPk",
+    "podcastYoutube": "FBCapmmopgI",
+    "notebooklm": "https://notebook.google.com/notebook/c5354897-5c84-4a22-81e7-bc4ee2d0585b",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch06_podcast_deepdive.m4a",
+    "srtFile": "第06章_血濺赤崁與大鹿港_說明影片.srt",
     "file": "第06章_血濺赤崁與大鹿港_郭懷一抗荷事件與早期漢人移民的悲歌.md",
     "videoSchedule": "2026-10-31 17:30",
     "podcastSchedule": "2026-10-31 19:30"
