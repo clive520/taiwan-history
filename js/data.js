@@ -112,13 +112,19 @@ const TAIWAN_HISTORY_DATA = [
     "subtitle": "西班牙人在基隆與淡水的北臺灣競逐",
     "era": "1626 – 1642",
     "coordinates": {
-      "lat": 25.1558,
-      "lng": 121.7645,
+      "lat": 25.1582,
+      "lng": 121.7644,
       "locationName": "基隆和平島聖薩爾瓦多城"
     },
-    "figures": ["伐爾得斯 (Carreño Valdés)", "道明會神父"],
-    "summary": "天主教傳教、硫磺與黃金探索、聖薩爾瓦多城與聖多明哥城興築，以及荷蘭軍隊北上驅逐西班牙人的北臺灣終局決戰。",
-    "status": "planned",
+    "figures": ["伐爾得斯 (Carreño Valdés)", "阿爾卡拉索", "艾斯基維神父", "波提紐"],
+    "summary": "天主教傳教、全臺首部《淡水語辭典》編纂、硫磺與黃金探索、聖薩爾瓦多城與聖多明哥城興築，以及荷蘭軍隊北上驅逐西班牙人的北臺灣終局決戰。",
+    "status": "published",
+    "bannerImage": "assets/images/ch05/ch05_hero_banner.jpg",
+    "youtube": "1xV__Smr_Xs",
+    "podcastYoutube": "5R-t3fwEDws",
+    "notebooklm": "https://notebook.google.com/notebook/1623ac44-c978-4c70-915f-8b599e72f4d8",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch05_podcast_deepdive.m4a",
+    "srtFile": "第05章_聖多明哥的十字架_說明影片.srt",
     "file": "第05章_聖多明哥的十字架_西班牙人在基隆與淡水的北臺灣競逐.md"
   },
   {
