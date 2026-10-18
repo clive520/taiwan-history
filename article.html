@@ -212,9 +212,13 @@
       let hasMedia = false;
 
       if (topic.youtube) {
-        let embedUrl = topic.youtube;
-        if (embedUrl.includes('youtu.be/')) {
-          embedUrl = embedUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+        let embedUrl = topic.youtube.trim();
+        if (!embedUrl.startsWith('http')) {
+          embedUrl = `https://www.youtube-nocookie.com/embed/${embedUrl}`;
+        } else if (embedUrl.includes('youtu.be/')) {
+          embedUrl = embedUrl.replace('youtu.be/', 'www.youtube-nocookie.com/embed/');
+        } else if (embedUrl.includes('watch?v=')) {
+          embedUrl = embedUrl.replace('watch?v=', 'embed/');
         }
         youtubeIframe.src = embedUrl;
         youtubeIframe.classList.remove('hidden');
