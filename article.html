@@ -88,7 +88,13 @@
             <div class="text-sm font-bold truncate max-w-[280px] sm:max-w-sm" id="audioTitle">歷史對談音訊</div>
           </div>
         </div>
-        <audio id="localAudioPlayer" controls class="w-full sm:w-auto flex-grow max-w-md"></audio>
+        <div class="flex items-center gap-3 w-full sm:w-auto flex-grow justify-end">
+          <audio id="localAudioPlayer" controls class="w-full sm:w-auto flex-grow max-w-md"></audio>
+          <a id="podcastYoutubeLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden shrink-0 flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-lg bg-red-600/90 hover:bg-red-600 text-white transition-all shadow-sm">
+            <i data-lucide="youtube" class="w-4 h-4"></i>
+            <span>YouTube 播客</span>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -239,6 +245,14 @@
         document.getElementById('audioTitle').textContent = `${topic.title} - 深度雙人對談播客`;
         audioWrapper.classList.remove('hidden');
         hasMedia = true;
+
+        if (topic.podcastYoutube) {
+          const podcastBtn = document.getElementById('podcastYoutubeLink');
+          if (podcastBtn) {
+            podcastBtn.href = topic.podcastYoutube.startsWith('http') ? topic.podcastYoutube : `https://youtu.be/${topic.podcastYoutube}`;
+            podcastBtn.classList.remove('hidden');
+          }
+        }
       }
 
       if (hasMedia) {

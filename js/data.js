@@ -19,6 +19,7 @@ const TAIWAN_HISTORY_DATA = [
     "status": "published",
     "bannerImage": "assets/images/ch01/ch01_hero_banner.jpg",
     "youtube": "5fKIcNMT_jI",
+    "podcastYoutube": "9Ep4670kORM",
     "notebooklm": "https://notebook.google.com/notebook/ec4c75cc-47e5-42d8-821f-11455131d55d",
     "videoFile": "https://youtu.be/5fKIcNMT_jI",
     "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch01_podcast_deepdive.m4a",
