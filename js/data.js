@@ -263,20 +263,29 @@ const TAIWAN_HISTORY_DATA = [
     "periodFolder": "03_明鄭東寧與海上孤忠",
     "title": "澎湖海戰與帝國落幕",
     "subtitle": "施琅水師破浪與東寧王國降清",
-    "era": "1683",
+    "era": "1683 – 1684",
     "coordinates": {
-      "lat": 23.5412,
-      "lng": 119.5358,
-      "locationName": "澎湖馬公風櫃尾"
+      "lat": 23.5658,
+      "lng": 119.5632,
+      "locationName": "澎湖媽宮水域與風櫃尾"
     },
     "figures": [
-      "施琅",
-      "劉國軒",
-      "鄭克塽",
-      "康熙皇帝"
+      "施琅 (水師提督)",
+      "劉國軒 (武平侯)",
+      "鄭克塽 (延平王)",
+      "鄭克𡒉 (監國)",
+      "康熙帝玄燁",
+      "馮錫範",
+      "李光地"
     ],
     "summary": "劉國軒與施琅的水師宿命對決、澎湖海戰風向逆轉、東寧降清與康熙朝廷『棄留臺灣』廷議大辯論。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch09/ch09_hero_banner.jpg",
+    "youtube": "MFRHdUPsYao",
+    "podcastYoutube": "cMvQqIYZCvE",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch09_podcast_deepdive.m4a",
+    "notebooklm": "https://notebook.google.com/notebook/384ad7a6-8b75-43c6-be97-4407e005ffc1",
+    "srtFile": "第09章_澎湖海戰與帝國落幕_說明影片.srt",
     "file": "第09章_澎湖海戰與帝國落幕_施琅水師破浪與東寧王國降清.md",
     "videoSchedule": "2026-11-03 17:30",
     "podcastSchedule": "2026-11-03 19:30"
