@@ -237,11 +237,15 @@ const TAIWAN_HISTORY_DATA = [
       "locationName": "臺南全臺首學孔廟"
     },
     "figures": [
-      "鄭經",
-      "陳永華"
+      "陳永華 (諮議參軍)",
+      "鄭經 (延平王)",
+      "李茂春",
+      "沈光文",
+      "英國東印度公司代表"
     ],
     "summary": "軍屯營盤田政策、設府置縣、全臺首學開創文教，奠定臺灣漢文化制度基礎與海上反清經貿王國體制。",
     "status": "published",
+    "bannerImage": "assets/images/ch08/ch08_hero_banner.jpg",
     "youtube": "aO5qQbw6ehw",
     "podcastYoutube": "-N6tchcDyHU",
     "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch08_podcast_deepdive.m4a",

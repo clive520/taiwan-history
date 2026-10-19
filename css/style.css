@@ -134,6 +134,11 @@ code, pre {
   display: block;
 }
 
+.dark .markdown-body img {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 /* 程式碼與長文本防撐爆折行保護 */
 .markdown-body pre {
   background: #0f172a;
