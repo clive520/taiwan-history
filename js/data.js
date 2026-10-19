@@ -241,7 +241,12 @@ const TAIWAN_HISTORY_DATA = [
       "陳永華"
     ],
     "summary": "軍屯營盤田政策、設府置縣、全臺首學開創文教，奠定臺灣漢文化制度基礎與海上反清經貿王國體制。",
-    "status": "planned",
+    "status": "published",
+    "youtube": "aO5qQbw6ehw",
+    "podcastYoutube": "-N6tchcDyHU",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch08_podcast_deepdive.m4a",
+    "notebooklm": "https://notebook.google.com/notebook/63f06a2e-10ea-41f4-b39b-2deec72d9b87",
+    "srtFile": "第08章_海外別立乾坤_說明影片.srt",
     "file": "第08章_海外別立乾坤_陳永華的屯墾孔廟儒學與東寧王國治理.md",
     "videoSchedule": "2026-11-02 17:30",
     "podcastSchedule": "2026-11-02 19:30"
