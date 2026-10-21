@@ -310,7 +310,13 @@ const TAIWAN_HISTORY_DATA = [
       "渡臺漢人先民"
     ],
     "summary": "冒死偷渡黑水溝、羅漢腳社會現象、八堡圳與瑠公圳引水拓荒，漢人移民在生存博弈中的生根拓墾。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch10/ch10_hero_banner.jpg",
+    "youtube": "Rd45_RsE5DU",
+    "podcastYoutube": "VPPLQWHw1Bc",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch10_podcast_deepdive.m4a",
+    "notebooklm": "https://notebook.google.com/notebook/2e42523c-3cd8-4b77-9db8-471e84baee53",
+    "srtFile": "第10章_唐山過臺灣的黑水溝血淚_說明影片.srt",
     "file": "第10章_唐山過臺灣的黑水溝血淚_渡臺禁令六死三留一回頭與開拓墾號.md",
     "videoSchedule": "2026-11-04 17:30",
     "podcastSchedule": "2026-11-04 19:30"
