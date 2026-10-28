@@ -23,8 +23,8 @@ from pathlib import Path
 
 if sys.platform == "win32":
     try:
-        sys.stdout.reconfigure(encoding="utf-8")
-        sys.stderr.reconfigure(encoding="utf-8")
+        sys.stdout.reconfigure(encoding="utf-8", line_buffering=True)
+        sys.stderr.reconfigure(encoding="utf-8", line_buffering=True)
     except Exception:
         pass
 
@@ -153,16 +153,35 @@ def get_authenticated_service(client_secrets_file=None, token_file=None):
                     f"❌ 找不到 Google Cloud OAuth 憑證 (client_secrets.json)！\n"
                     f"請確認檔案位於專案目錄或共用雲端硬碟中。"
                 )
-            print(f"\n🔑 使用憑證檔案：{secret_path}")
-            print("🌐 正在啟動 Google OAuth 2.0 本地授權流程...")
+            print(f"\n🔑 使用憑證檔案：{secret_path}", flush=True)
+            print("🌐 正在啟動 Google OAuth 2.0 本地授權流程...", flush=True)
             flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
                 str(secret_path), SCOPES
             )
+            class UrlSaverPrompt:
+                def format(self, **kwargs):
+                    url = kwargs.get("url", "")
+                    try:
+                        (Path(__file__).parent / "youtube_auth_url.txt").write_text(url, encoding="utf-8")
+                    except Exception:
+                        pass
+                    return f"\n{'='*70}\n👉 請在瀏覽器中開啟授權連結：\n{url}\n{'='*70}\n🌐 正在等待授權回傳...\n"
+
             # 優先嘗試 8080，若被佔用則由系統隨機分配 port=0
             try:
-                creds = flow.run_local_server(port=8080, prompt="consent")
+                creds = flow.run_local_server(
+                    port=8080,
+                    prompt="consent",
+                    access_type="offline",
+                    authorization_prompt_message=UrlSaverPrompt()
+                )
             except Exception:
-                creds = flow.run_local_server(port=0, prompt="consent")
+                creds = flow.run_local_server(
+                    port=0,
+                    prompt="consent",
+                    access_type="offline",
+                    authorization_prompt_message=UrlSaverPrompt()
+                )
 
         # 儲存 Token 到本地以及共用雲端硬碟 (若可用)
         token_json_data = creds.to_json()

@@ -342,7 +342,13 @@ const TAIWAN_HISTORY_DATA = [
       "福康安"
     ],
     "summary": "天地會結社、反清民變、閩粵漳泉分類械鬥，揭開官逼民反與基層生存資源爭奪的血淚真相。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch11/ch11_hero_banner.jpg",
+    "youtube": "eQgzt1vCRws",
+    "podcastYoutube": "agIBuot_bTI",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch11_podcast_deepdive.m4a",
+    "notebooklm": "https://notebook.google.com/notebook/a6d753c5-2e9a-4918-83a1-dea997b31992",
+    "srtFile": "第11章_三年一反五年一亂_說明影片.srt",
     "file": "第11章_三年一反五年一亂_朱一貴林爽文與全島械鬥的生存博弈.md",
     "videoSchedule": "2026-11-05 17:30",
     "podcastSchedule": "2026-11-05 19:30"
