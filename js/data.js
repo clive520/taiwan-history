@@ -374,7 +374,13 @@ const TAIWAN_HISTORY_DATA = [
       "約翰·陶德"
     ],
     "summary": "牡丹社事件打破封禁、茶糖樟腦外銷全球、臺灣建省、全臺首條鐵路通車與現代化電報系統建立。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch12/ch12_hero_banner.jpg",
+    "youtube": "rMa854Dcga0",
+    "podcastYoutube": "0p5jfL8fNmo",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch12_podcast_deepdive.m4a",
+    "notebooklm": "https://notebook.google.com/notebook/ee220930-b26c-412d-8939-29b55f50a41f",
+    "srtFile": "第12章_開港通商與現代化急先鋒_說明影片.srt",
     "file": "第12章_開港通商與現代化急先鋒_沈葆楨開山撫番到劉銘傳建省新政.md",
     "videoSchedule": "2026-11-06 17:30",
     "podcastSchedule": "2026-11-06 19:30"
