@@ -406,7 +406,13 @@ const TAIWAN_HISTORY_DATA = [
       "簡大獅"
     ],
     "summary": "馬關割臺、短命的臺灣民主國、全島義勇反抗與最後漢人武裝抗日『噍吧哖事件』的血淚終曲。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch13/ch13_hero_banner.jpg",
+    "youtube": "w_w9qd8zOLw",
+    "podcastYoutube": "hPKl9JEMu7w",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch13_podcast_deepdive.m4a",
+    "notebooklm": "https://notebook.google.com/notebook/e31351ff-da48-4c4e-9a58-9726b6c184dc",
+    "srtFile": "第13章_乙未悲歌與武裝抗日_說明影片.srt",
     "file": "第13章_乙未悲歌與武裝抗日_臺灣民主國黑旗軍與噍吧哖事件的終曲.md",
     "videoSchedule": "2026-11-07 17:30",
     "podcastSchedule": "2026-11-07 19:30"
