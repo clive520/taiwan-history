@@ -287,9 +287,14 @@ def upload_video(youtube, video_file, title, description, tags=None, schedule_st
     }
     if schedule_str:
         utc_iso = parse_schedule_to_utc_iso(schedule_str)
-        status_body["privacyStatus"] = "private"  # API 限制：排程時必須設為 private
-        status_body["publishAt"] = utc_iso
-        print(f"⏰ 排程公開時間：{schedule_str} (UTC 傳送值: {utc_iso})")
+        sched_dt = datetime.datetime.fromisoformat(utc_iso.replace("Z", "+00:00"))
+        if sched_dt <= datetime.datetime.now(datetime.timezone.utc):
+            print(f"⏰ 排程時間 {schedule_str} (UTC: {utc_iso}) 已為過去時間，自動轉為直接公開發布 (Public)")
+            status_body["privacyStatus"] = "public"
+        else:
+            status_body["privacyStatus"] = "private"  # API 限制：排程時必須設為 private
+            status_body["publishAt"] = utc_iso
+            print(f"⏰ 排程公開時間：{schedule_str} (UTC 傳送值: {utc_iso})")
     else:
         status_body["privacyStatus"] = "public"
         print("📢 發布狀態：直接公開 (Public)")
