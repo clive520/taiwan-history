@@ -437,7 +437,13 @@ const TAIWAN_HISTORY_DATA = [
       "八田與一"
     ],
     "summary": "三大基礎調查、縱貫鐵路全線貫通、八田與一興建嘉南大圳，奠定現代化物質骨架與米糖經濟榨取體制。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch14/ch14_hero_banner.jpg",
+    "youtube": "ALfbszmd7VI",
+    "podcastYoutube": "GEcZQh1kJqw",
+    "notebooklm": "https://notebook.google.com/notebook/4a8b0145-f20d-41f8-a94a-022fc220f854",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch14_podcast_deepdive.m4a",
+    "srtFile": "第14章_現代化骨架與殖民之刃_說明影片.srt",
     "file": "第14章_現代化骨架與殖民之刃_縱貫鐵路嘉南大圳與後藤新平的科學統治.md",
     "videoSchedule": "2026-11-08 17:30",
     "podcastSchedule": "2026-11-08 19:30"
