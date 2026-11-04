@@ -469,7 +469,13 @@ const TAIWAN_HISTORY_DATA = [
       "莫那·魯道"
     ],
     "summary": "大稻埕文化啟蒙、議會請願爭取自治；與賽德克族莫那·魯道在殖民極限壓迫下爆發的霧社事件尊嚴絕地反擊。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch15/ch15_hero_banner.jpg",
+    "youtube": "7_yMQ5iIR0E",
+    "podcastYoutube": "M3FS3qXw3TM",
+    "notebooklm": "https://notebook.google.com/notebook/89f33278-4573-4715-9de5-c5fb6c241c05",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch15_podcast_deepdive.m4a",
+    "srtFile": "第15章_臺灣人的臺灣_說明影片.srt",
     "file": "第15章_臺灣人的臺灣_文化協會議會設置請願運動與霧社事件的警鐘.md",
     "videoSchedule": "2026-11-09 17:30",
     "podcastSchedule": "2026-11-09 19:30"
