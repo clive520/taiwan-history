@@ -533,7 +533,13 @@ const TAIWAN_HISTORY_DATA = [
       "李登輝"
     ],
     "summary": "黨外雜誌運動、美麗島大審、解嚴開放黨禁報禁、野百合學運與 1996 第一次全民直選總統的民主蛻變。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch17/ch17_hero_banner.jpg",
+    "youtube": "VC8bZ0ZnrJI",
+    "podcastYoutube": "m_r-lP_SkFo",
+    "notebooklm": "https://notebook.google.com/notebook/f67192ed-1c3c-4ddb-9d5c-cd94baa311a2",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch17_podcast_deepdive.m4a",
+    "srtFile": "第17章_走出戒嚴的民主奇蹟_說明影片.srt",
     "file": "第17章_走出戒嚴的民主奇蹟_美麗島事件野百合學運與總統直選之路.md",
     "videoSchedule": "2026-11-11 17:30",
     "podcastSchedule": "2026-11-11 19:30"
