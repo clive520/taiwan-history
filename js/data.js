@@ -501,7 +501,13 @@ const TAIWAN_HISTORY_DATA = [
       "受難知識份子"
     ],
     "summary": "戰後接收摩擦、惡性通貨膨脹、二二八傷痕記憶，以及長達三十八年戒嚴令下白色恐怖人權苦難與歷史省思。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch16/ch16_hero_banner.jpg",
+    "youtube": "JDqVib4oe8E",
+    "podcastYoutube": "scrxt7SiRRA",
+    "notebooklm": "https://notebook.google.com/notebook/432b3346-0a7d-416c-84e2-8a521834b5c4",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch16_podcast_deepdive.m4a",
+    "srtFile": "第16章_時代巨變與傷痕記憶_說明影片.srt",
     "file": "第16章_時代巨變與傷痕記憶_戰後接收二二八事件與白色恐怖年代.md",
     "videoSchedule": "2026-11-10 17:30",
     "podcastSchedule": "2026-11-10 19:30"
