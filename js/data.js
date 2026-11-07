@@ -565,7 +565,13 @@ const TAIWAN_HISTORY_DATA = [
       "張忠謀"
     ],
     "summary": "加工出口區外銷、引進半導體技術轉移、工研院孵化與台積電晶圓代工模式，打造守護全球科技動脈的矽盾傳奇。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/ch18/ch18_hero_banner.jpg",
+    "youtube": "YASpbVPsozU",
+    "podcastYoutube": "d7Gav39xR-s",
+    "notebooklm": "https://notebook.google.com/notebook/5323a966-58e1-4aea-8ae1-257174e629ea",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/ch18_podcast_deepdive.m4a",
+    "srtFile": "第18章_矽島崛起與世界舞台_說明影片.srt",
     "file": "第18章_矽島崛起與世界舞台_從客廳即工廠竹科奇蹟到台積電的半導體傳奇.md",
     "videoSchedule": "2026-11-12 17:30",
     "podcastSchedule": "2026-11-12 19:30"
