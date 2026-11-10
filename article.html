@@ -337,13 +337,6 @@
         document.getElementById('breadcrumbTitle').textContent = parts[parts.length - 1].replace('.md', '');
       }
 
-        // 檢查多媒體影音與精裝封面配置
-        setupMediaPlayers(matchedTopic);
-      } else {
-        const parts = filePath.split('/');
-        document.getElementById('breadcrumbTitle').textContent = parts[parts.length - 1].replace('.md', '');
-      }
-
       const githubBtn = document.getElementById('githubEditBtn');
       githubBtn.href = `https://github.com/clive520/taiwan-history/blob/main/${filePath}`;
 
