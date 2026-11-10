@@ -236,3 +236,26 @@ html, body {
   max-width: 100vw;
   box-sizing: border-box;
 }
+
+/* 美食風土專屬視覺點綴 */
+.food-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -6px rgba(217, 119, 6, 0.15), 0 8px 12px -4px rgba(217, 119, 6, 0.08);
+}
+
+.dark .food-card:hover {
+  box-shadow: 0 12px 28px -6px rgba(245, 158, 11, 0.25), 0 8px 12px -4px rgba(245, 158, 11, 0.12);
+}
+
+.portal-card {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portal-card:hover {
+  transform: translateY(-6px);
+}
+

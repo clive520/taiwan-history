@@ -78,9 +78,14 @@
   <header class="sticky top-0 z-50 glass-panel border-b border-slate-200/80 dark:border-slate-800/80">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <a href="index.html" class="flex items-center space-x-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+        <a href="index.html" class="flex items-center space-x-1.5 text-xs font-medium text-slate-500 hover:text-teal-600 dark:hover:text-teal-400 mr-2 py-1 px-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="home" class="w-3.5 h-3.5"></i>
+          <span>總門戶</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">|</span>
+        <a id="topBackBtn" href="history.html" class="flex items-center space-x-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
           <i data-lucide="arrow-left" class="w-4 h-4"></i>
-          <span>返回文庫首頁</span>
+          <span>返回專題目錄</span>
         </a>
       </div>
 
@@ -102,12 +107,14 @@
   <main class="max-w-4xl mx-auto px-4 sm:px-6 py-10 flex-grow w-full">
     
     <!-- 麵包屑導航與狀態 -->
-    <div class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400 mb-6">
-      <a href="index.html" class="hover:text-emerald-500">文庫首頁</a>
+    <div class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400 mb-6 flex-wrap">
+      <a href="index.html" class="hover:text-teal-600">文庫總門戶</a>
+      <span>/</span>
+      <a id="seriesBreadcrumb" href="history.html" class="hover:text-emerald-600 font-medium">臺灣史全卷</a>
       <span>/</span>
       <span id="breadcrumbCategory">歷史時期</span>
       <span>/</span>
-      <span id="breadcrumbTitle" class="text-slate-800 dark:text-slate-200 font-semibold truncate">載入中...</span>
+      <span id="breadcrumbTitle" class="text-slate-800 dark:text-slate-200 font-semibold truncate max-w-[200px] sm:max-w-none">載入中...</span>
     </div>
 
     <!-- 影音播放區塊 (若已生成影片或音訊) -->
@@ -196,7 +203,7 @@
 
     <!-- 底部切換上下篇 -->
     <div id="navigationFooter" class="mt-8 pt-6 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600">
+      <a id="bottomBackBtn" href="history.html" class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600">
         <i data-lucide="chevron-left" class="w-4 h-4"></i> 回到專題清單
       </a>
       <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="flex items-center gap-1.5 text-xs text-slate-500 hover:text-emerald-600">
@@ -206,10 +213,11 @@
   </main>
 
   <footer class="border-t border-slate-200/80 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 py-6 text-center text-xs text-slate-500">
-    臺灣史專題寫作與數位文庫 &copy; 2026 &bull; Project FormosaChronicles
+    <span id="footerBrand">臺灣史專題寫作與數位文庫 &copy; 2026 &bull; Formosa Archives</span>
   </footer>
 
-  <script src="js/data.js"></script>
+  <script src="js/data-history.js"></script>
+  <script src="js/data-food.js"></script>
   <script>
     lucide.createIcons();
 
@@ -227,18 +235,89 @@
     const urlParams = new URLSearchParams(window.location.search);
     const fileParam = urlParams.get('file');
     const idParam = urlParams.get('id');
+    const seriesParam = urlParams.get('series'); // 'history' | 'food'
 
     async function loadArticle() {
       let filePath = fileParam;
       let matchedTopic = null;
+      let isFood = (seriesParam === 'food') || (fileParam && (fileParam.includes('舌尖上的臺灣') || fileParam.includes('food')));
 
-      if (idParam && typeof TAIWAN_HISTORY_DATA !== 'undefined') {
-        matchedTopic = TAIWAN_HISTORY_DATA.find(t => t.id === idParam);
-        if (matchedTopic) {
-          filePath = `${matchedTopic.periodFolder}/${matchedTopic.file}`;
+      const historyData = typeof TAIWAN_HISTORY_DATA !== 'undefined' ? TAIWAN_HISTORY_DATA : [];
+      const foodData = typeof TAIWAN_FOOD_DATA !== 'undefined' ? TAIWAN_FOOD_DATA : [];
+
+      if (isFood) {
+        if (idParam && foodData.length > 0) {
+          matchedTopic = foodData.find(t => t.id === idParam);
+        } else if (fileParam && foodData.length > 0) {
+          matchedTopic = foodData.find(t => `${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam);
         }
-      } else if (fileParam && typeof TAIWAN_HISTORY_DATA !== 'undefined') {
-        matchedTopic = TAIWAN_HISTORY_DATA.find(t => `${t.periodFolder}/${t.file}` === fileParam);
+      } else {
+        if (idParam && historyData.length > 0) {
+          matchedTopic = historyData.find(t => t.id === idParam);
+        } else if (fileParam && historyData.length > 0) {
+          matchedTopic = historyData.find(t => `${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam);
+        }
+      }
+
+      // 若指定資料庫沒找到，且未強制指定 seriesParam，嘗試在另一個資料庫找
+      if (!matchedTopic && !seriesParam) {
+        if (!isFood && foodData.length > 0) {
+          matchedTopic = foodData.find(t => (idParam && t.id === idParam) || (fileParam && (`${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam)));
+          if (matchedTopic) isFood = true;
+        } else if (isFood && historyData.length > 0) {
+          matchedTopic = historyData.find(t => (idParam && t.id === idParam) || (fileParam && (`${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam)));
+          if (matchedTopic) isFood = false;
+        }
+      }
+
+      if (matchedTopic && !filePath) {
+        filePath = `${matchedTopic.periodFolder}/${matchedTopic.file}`;
+      }
+
+      // 更新頂部返回按鈕、麵包屑與頁腳
+      const topBackBtn = document.getElementById('topBackBtn');
+      const bottomBackBtn = document.getElementById('bottomBackBtn');
+      const seriesBreadcrumb = document.getElementById('seriesBreadcrumb');
+      const footerBrand = document.getElementById('footerBrand');
+
+      if (isFood) {
+        if (topBackBtn) {
+          topBackBtn.href = 'food.html';
+          topBackBtn.className = 'flex items-center space-x-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors';
+          topBackBtn.querySelector('span').textContent = '返回《舌尖上的臺灣》目錄';
+        }
+        if (bottomBackBtn) {
+          bottomBackBtn.href = 'food.html';
+          bottomBackBtn.className = 'flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-amber-600';
+          bottomBackBtn.innerHTML = '<i data-lucide="chevron-left" class="w-4 h-4"></i> 回到《舌尖上的臺灣》專題清單';
+        }
+        if (seriesBreadcrumb) {
+          seriesBreadcrumb.href = 'food.html';
+          seriesBreadcrumb.textContent = '舌尖上的臺灣';
+          seriesBreadcrumb.className = 'hover:text-amber-600 font-medium';
+        }
+        if (footerBrand) {
+          footerBrand.innerHTML = '舌尖上的臺灣專題寫作與數位文庫 &copy; 2026 &bull; FormosaGastronomy';
+        }
+      } else {
+        if (topBackBtn) {
+          topBackBtn.href = 'history.html';
+          topBackBtn.className = 'flex items-center space-x-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors';
+          topBackBtn.querySelector('span').textContent = '返回《臺灣史》目錄';
+        }
+        if (bottomBackBtn) {
+          bottomBackBtn.href = 'history.html';
+          bottomBackBtn.className = 'flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-emerald-600';
+          bottomBackBtn.innerHTML = '<i data-lucide="chevron-left" class="w-4 h-4"></i> 回到《臺灣史》專題清單';
+        }
+        if (seriesBreadcrumb) {
+          seriesBreadcrumb.href = 'history.html';
+          seriesBreadcrumb.textContent = '臺灣史全卷';
+          seriesBreadcrumb.className = 'hover:text-emerald-600 font-medium';
+        }
+        if (footerBrand) {
+          footerBrand.innerHTML = '臺灣史專題寫作與數位文庫 &copy; 2026 &bull; FormosaChronicles';
+        }
       }
 
       if (!filePath) {
@@ -249,7 +328,14 @@
       if (matchedTopic) {
         document.getElementById('breadcrumbCategory').textContent = matchedTopic.periodName;
         document.getElementById('breadcrumbTitle').textContent = matchedTopic.title;
-        document.title = `${matchedTopic.title} | 臺灣史數位文庫`;
+        document.title = `${matchedTopic.title} | ${isFood ? '舌尖上的臺灣' : '臺灣史'}數位文庫`;
+
+        // 檢查多媒體影音與精裝封面配置
+        setupMediaPlayers(matchedTopic, isFood);
+      } else {
+        const parts = filePath.split('/');
+        document.getElementById('breadcrumbTitle').textContent = parts[parts.length - 1].replace('.md', '');
+      }
 
         // 檢查多媒體影音與精裝封面配置
         setupMediaPlayers(matchedTopic);

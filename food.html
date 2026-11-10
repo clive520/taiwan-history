@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>舌尖上的臺灣 | 飲食風土與文化記憶數位專題</title>
+  <meta name="description" content="從南島山海原味、大航海蔗糖、唐山渡海肉臊，到日治和洋折衷、戰後眷村牛肉麵與當代米其林新臺菜。以食物為密碼，解構四百年島嶼身世。">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-amber-50/30 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- 頂部導航列 -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-amber-200/50 dark:border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="flex items-center space-x-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-orange-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-amber-500/25 group-hover:scale-105 transition-transform">
+            <i data-lucide="utensils" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-amber-900 via-amber-800 to-orange-700 dark:from-amber-200 dark:to-orange-300 bg-clip-text text-transparent">舌尖上的臺灣</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 border border-amber-300/60 dark:border-amber-800/60">15章特輯</span>
+            </div>
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono -mt-0.5">FormosaGastronomy</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 全系列切換標籤 (Desktop) -->
+      <nav class="hidden lg:flex items-center space-x-1 bg-slate-200/70 dark:bg-slate-800/70 p-1 rounded-xl text-xs font-medium">
+        <a href="index.html" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+          <i data-lucide="home" class="w-3.5 h-3.5"></i>
+          <span>總門戶</span>
+        </a>
+        <a href="history.html" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all">
+          <i data-lucide="book-marked" class="w-3.5 h-3.5"></i>
+          <span>臺灣史全卷</span>
+        </a>
+        <a href="food.html" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-sm font-semibold">
+          <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
+          <span>舌尖上的臺灣</span>
+        </a>
+      </nav>
+
+      <!-- 視角切換器 (Tab Switcher) -->
+      <div class="hidden md:flex items-center bg-amber-100/70 dark:bg-slate-800/70 p-1 rounded-xl text-xs font-medium border border-amber-200/40 dark:border-slate-700/60">
+        <button id="viewGridBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 text-amber-900 dark:text-amber-200 shadow-sm transition-all font-semibold">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+          <span>風味目錄</span>
+        </button>
+        <button id="viewTimelineBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-amber-800 dark:hover:text-white transition-all">
+          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+          <span>飲食流變軸</span>
+        </button>
+        <button id="viewMapBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-amber-800 dark:hover:text-white transition-all">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+          <span>全臺風土地圖</span>
+        </button>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button id="themeToggle" aria-label="切換深淺模式" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-amber-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+        </button>
+
+        <a href="https://github.com/clive520/taiwan-history" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-slate-700 dark:text-slate-200 bg-amber-100/80 hover:bg-amber-200/80 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 手機版大系切換列 -->
+  <div class="lg:hidden flex items-center justify-around bg-slate-200/90 dark:bg-slate-800/90 border-b border-slate-300 dark:border-slate-700 px-3 py-1.5 text-xs font-medium">
+    <a href="index.html" class="flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+      <i data-lucide="home" class="w-3.5 h-3.5"></i> 總門戶
+    </a>
+    <span class="text-slate-300 dark:text-slate-600">|</span>
+    <a href="history.html" class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 flex items-center gap-1">
+      <i data-lucide="book-marked" class="w-3.5 h-3.5"></i> 臺灣史
+    </a>
+    <span class="text-slate-300 dark:text-slate-600">|</span>
+    <a href="food.html" class="font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+      <i data-lucide="utensils" class="w-3.5 h-3.5"></i> 舌尖上的臺灣
+    </a>
+  </div>
+
+  <!-- 手機版視角切換器 -->
+  <div class="md:hidden flex items-center justify-around bg-amber-50/80 dark:bg-slate-900 border-b border-amber-200/60 dark:border-slate-800 p-2 text-xs font-medium sticky top-16 z-40">
+    <button id="mobileViewGridBtn" class="flex items-center space-x-1 py-1.5 px-3 rounded-lg bg-white dark:bg-slate-800 text-amber-600 dark:text-amber-400 font-bold shadow-sm">
+      <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+      <span>目錄</span>
+    </button>
+    <button id="mobileViewTimelineBtn" class="flex items-center space-x-1 py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400">
+      <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+      <span>流變軸</span>
+    </button>
+    <button id="mobileViewMapBtn" class="flex items-center space-x-1 py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400">
+      <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+      <span>風土地圖</span>
+    </button>
+  </div>
+
+  <!-- Hero 英雄區 -->
+  <section class="relative py-12 md:py-16 overflow-hidden bg-gradient-to-b from-amber-100/50 via-orange-50/20 to-transparent dark:from-amber-950/20 dark:via-transparent dark:to-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 text-xs font-medium mb-4 border border-amber-300/50 dark:border-amber-800/50 shadow-sm">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-600 dark:text-amber-400"></i>
+        <span>臺灣文史大系 &bull; 飲食風土深度專題</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
+        舌尖上的臺灣：<span class="bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 bg-clip-text text-transparent">以食物解碼島嶼四百年身世</span>
+      </h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
+        從南島山海的馬告煙燻與火種、大航海甘蔗與鹿皮，到鹿港黑豬肉臊、善化溫體牛、眷村牛肉麵與米其林星級新臺菜。每一道滋味，都是族群拓墾與命運融合的真切見證。
+      </p>
+
+      <!-- 統計數據徽章 -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
+        <div class="p-3 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-amber-200/60 dark:border-slate-800 shadow-sm backdrop-blur">
+          <div class="text-2xl font-black text-amber-600 dark:text-amber-400">15</div>
+          <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">經典風味專題</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-amber-200/60 dark:border-slate-800 shadow-sm backdrop-blur">
+          <div class="text-2xl font-black text-orange-600 dark:text-orange-400">5</div>
+          <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">歷史轉型篇章</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-amber-200/60 dark:border-slate-800 shadow-sm backdrop-blur">
+          <div class="text-2xl font-black text-amber-700 dark:text-amber-300">20+</div>
+          <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">島嶼風土食材</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-amber-200/60 dark:border-slate-800 shadow-sm backdrop-blur">
+          <div class="text-2xl font-black text-amber-500">4K & 播客</div>
+          <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">雙規格多媒體對應</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主要互動內容區 -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+    
+    <!-- 篩選與搜尋列 -->
+    <div class="mb-8 space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        
+        <!-- 時期分類 Tabs -->
+        <div class="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none" id="periodTabs">
+          <!-- 由 JS 動態生成 -->
+        </div>
+
+        <!-- 搜尋框 -->
+        <div class="relative w-full md:w-72 shrink-0">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="搜尋食材、菜式或地名..." 
+            class="w-full pl-9 pr-8 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-amber-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-all shadow-sm"
+          >
+          <button id="clearSearch" class="hidden absolute right-2.5 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600">
+            <i data-lucide="x" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 狀態提示 -->
+      <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1">
+        <span id="resultsCount">載入中...</span>
+        <div class="flex items-center gap-3">
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500"></span> 專題長文</span>
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500"></span> YouTube 影片</span>
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-500"></span> 深度對談播客</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 視圖一：章節卡片網格 -->
+    <section id="gridSection">
+      <div id="chaptersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 由 JS 動態渲染卡片 -->
+      </div>
+    </section>
+
+    <!-- 視圖二：飲食流變時間軸 -->
+    <section id="timelineSection" class="hidden">
+      <div class="relative max-w-4xl mx-auto py-6" id="timelineContainer">
+        <!-- 垂直時間軸主線 -->
+        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-amber-200 dark:bg-amber-900/60 transform md:-translate-x-1/2"></div>
+        <div id="timelineList" class="space-y-8"></div>
+      </div>
+    </section>
+
+    <!-- 視圖三：全臺風土食材地圖 -->
+    <section id="mapSection" class="hidden">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">臺灣風土食材與原產地探索地圖</h2>
+        <p class="text-sm text-slate-500">點擊地圖上的各料理起源坐標，探索食材原產地、風土環境與文化傳奇</p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-amber-200/80 dark:border-slate-800 shadow-sm">
+        <div id="mapContainer"></div>
+      </div>
+    </section>
+
+    <!-- 空搜尋狀態 -->
+    <div id="emptyState" class="hidden text-center py-16">
+      <div class="w-16 h-16 rounded-full bg-amber-50 dark:bg-slate-800 text-amber-500 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="search-x" class="w-8 h-8"></i>
+      </div>
+      <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-1">找不到相符的風味專題</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">請嘗試更換關鍵字（如：小米、牛肉麵、珍珠奶茶、烏魚子）或重設分類</p>
+    </div>
+  </main>
+
+  <!-- 頁腳 -->
+  <footer class="border-t border-amber-200/60 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="utensils" class="w-4 h-4 text-amber-500"></i>
+        <span>舌尖上的臺灣專題寫作與數位文庫 &copy; 2026 &bull; FormosaGastronomy</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="index.html" class="hover:text-amber-500 transition-colors">文庫總門戶</a>
+        <span>&bull;</span>
+        <a href="history.html" class="hover:text-emerald-500 transition-colors">臺灣史全卷</a>
+        <span>&bull;</span>
+        <a href="article.html?series=food&file=舌尖上的臺灣/00_專案計畫與規範/舌尖上的臺灣專題寫作與數位文庫計畫書.md" class="hover:text-amber-500 transition-colors">查看美食計畫書</a>
+        <span>&bull;</span>
+        <a href="https://github.com/clive520/taiwan-history" target="_blank" class="hover:text-amber-500 transition-colors">GitHub 開源專案</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data-food.js"></script>
+  <script src="js/food-app.js"></script>
+</body>
+</html>
