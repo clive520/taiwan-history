@@ -16,10 +16,14 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["小米", "Cinavu", "馬告", "刺蔥", "小米酒"],
     "summary": "探尋南島先民與島嶼山林的共存滋味，假酸漿葉包裹的醃肉、石板上的山豬油脂與馬告火種。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/food_ch01/food_ch01_hero_banner.jpg",
+    "youtube": "tT9wePxt0ZY",
+    "podcastYoutube": "r7MVQa5En9A",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch01_podcast_deepdive.m4a",
     "file": "第01章_粟米野豬與香料火種_南島先民的煙燻採集與土地智慧.md",
-    "videoSchedule": "2026-11-16 17:30",
-    "podcastSchedule": "2026-11-16 19:30"
+    "videoSchedule": "2026-11-13 17:30",
+    "podcastSchedule": "2026-11-13 19:30"
   },
   {
     "id": "ch02",
@@ -39,8 +43,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "十七世紀大員港灣的甜蜜洗禮，荷蘭人引進的水牛、甘蔗園與大航海時代的跨洋滋味交會。",
     "status": "planned",
     "file": "第02章_大航海的蔗香與鹿皮_荷西東印度公司糖業拓墾與熱帶果物登陸.md",
-    "videoSchedule": "2026-11-17 17:30",
-    "podcastSchedule": "2026-11-17 19:30"
+    "videoSchedule": "2026-11-14 17:30",
+    "podcastSchedule": "2026-11-14 19:30"
   },
   {
     "id": "ch03",
@@ -60,8 +64,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "冬至信魚南下的黃金浪潮，曬鹽結晶與海洋子民以鹽漬抗衡歲月流逝的生存智慧。",
     "status": "planned",
     "file": "第03章_黑水溝的鹹香與烏金_沿海鹽田討海人補給與烏魚子傳奇.md",
-    "videoSchedule": "2026-11-18 17:30",
-    "podcastSchedule": "2026-11-18 19:30"
+    "videoSchedule": "2026-11-15 17:30",
+    "podcastSchedule": "2026-11-15 19:30"
   },
   {
     "id": "ch04",
@@ -81,8 +85,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "紅蔥頭在豬油中激發的靈魂香氣，黑豆蔭油慢火熬煮的膠質琥珀，貫穿全臺三百年平民心靈之味。",
     "status": "planned",
     "file": "第04章_一碗肉臊的百年身世_黑豬肉紅蔥頭與醬油工藝如何奠定庶民味覺之王.md",
-    "videoSchedule": "2026-11-19 17:30",
-    "podcastSchedule": "2026-11-19 19:30"
+    "videoSchedule": "2026-11-16 17:30",
+    "podcastSchedule": "2026-11-16 19:30"
   },
   {
     "id": "ch05",
@@ -102,8 +106,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "從傳統農業社會「牛同人耕、終身不食」的虔敬禁忌，到凌晨黃金四小時現宰直送府城的清甜奇蹟。",
     "status": "planned",
     "file": "第05章_水牛禁忌與清晨的甘甜_臺南溫體牛肉湯的破戒身世與屠宰冷鏈微革命.md",
-    "videoSchedule": "2026-11-20 17:30",
-    "podcastSchedule": "2026-11-20 19:30"
+    "videoSchedule": "2026-11-17 17:30",
+    "podcastSchedule": "2026-11-17 19:30"
   },
   {
     "id": "ch06",
@@ -123,8 +127,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "九降風吹拂下的細白米粉、客庄粄條與廟埕前祈願長壽平安的紅龜粿，稻米在祭儀與節令中的千變萬化。",
     "status": "planned",
     "file": "第06章_廟埕香火與米食變奏_炊粿米苔目米粉與紅龜粿的歲時禮俗.md",
-    "videoSchedule": "2026-11-21 17:30",
-    "podcastSchedule": "2026-11-21 19:30"
+    "videoSchedule": "2026-11-18 17:30",
+    "podcastSchedule": "2026-11-18 19:30"
   },
   {
     "id": "ch07",
@@ -144,8 +148,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "鑊氣沖天的炒鱔魚與晶瑩羹湯中那抹濃郁的甜，解密蔗糖在府城從奢侈品炫耀到全城風雅的集體記憶。",
     "status": "planned",
     "file": "第07章_甘甜的舌尖密碼_為什麼臺南人的菜這麼甜明鄭煮糖府城富庶與貴族炫耀心理學.md",
-    "videoSchedule": "2026-11-22 17:30",
-    "podcastSchedule": "2026-11-22 19:30"
+    "videoSchedule": "2026-11-19 17:30",
+    "podcastSchedule": "2026-11-19 19:30"
   },
   {
     "id": "ch08",
@@ -165,8 +169,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "陽明山竹子湖梯田裡的遺傳學奇蹟，蓬萊米如何取代乾癟的在來米，重塑全東亞的家庭餐桌餐食格局。",
     "status": "planned",
     "file": "第08章_改變世界的綠色奇蹟_磯永吉的蓬萊米育種嘉南平原大穀倉與日本米食革命.md",
-    "videoSchedule": "2026-11-23 17:30",
-    "podcastSchedule": "2026-11-23 19:30"
+    "videoSchedule": "2026-11-20 17:30",
+    "podcastSchedule": "2026-11-20 19:30"
   },
   {
     "id": "ch09",
@@ -186,8 +190,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "1908 年縱貫鐵路通車，車廂窗邊飄出的排骨香與木片便當，以及生啤酒、喫茶店洋食帶來的摩登都市節奏。",
     "status": "planned",
     "file": "第09章_汽笛聲中的木片便當_縱貫鐵路通車生啤酒喫茶店與鐵路便當的摩登生活.md",
-    "videoSchedule": "2026-11-24 17:30",
-    "podcastSchedule": "2026-11-24 19:30"
+    "videoSchedule": "2026-11-21 17:30",
+    "podcastSchedule": "2026-11-21 19:30"
   },
   {
     "id": "ch10",
@@ -207,8 +211,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "小綠葉蟬叮咬造就的蜜香奇蹟，大稻埕洋行千帆競發，臺灣烏龍茶如何名揚英倫、征服維多利亞女王。",
     "status": "planned",
     "file": "第10章_山嵐間的東方美人_大稻埕洋行新竹苗栗客庄膨風茶與征服世界的烏龍傳奇.md",
-    "videoSchedule": "2026-11-25 17:30",
-    "podcastSchedule": "2026-11-25 19:30"
+    "videoSchedule": "2026-11-22 17:30",
+    "podcastSchedule": "2026-11-22 19:30"
   },
   {
     "id": "ch11",
@@ -228,8 +232,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "四川沒有「川味紅燒牛肉麵」！走進岡山眷村空軍老兵以蠶豆醬、牛骨紅湯與臺灣酸菜拼湊出的一解鄉愁混血神作。",
     "status": "planned",
     "file": "第11章_那一碗鄉愁的紅湯_岡山豆瓣醬四川老兵與臺灣紅燒牛肉麵的混血傳奇.md",
-    "videoSchedule": "2026-11-26 17:30",
-    "podcastSchedule": "2026-11-26 19:30"
+    "videoSchedule": "2026-11-23 17:30",
+    "podcastSchedule": "2026-11-23 19:30"
   },
   {
     "id": "ch12",
@@ -249,8 +253,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "中美合作麵粉袋縫成短褲的歲月，炭爐旁貼爐烤出的厚燒餅、大鐵鍋裡沸騰的水餃，北方麵食如何徹底植根南方島嶼。",
     "status": "planned",
     "file": "第12章_晨光裡的麵粉香_美援麵粉燒餅油條清漿與眷村水餃烙餅的庶民突圍.md",
-    "videoSchedule": "2026-11-27 17:30",
-    "podcastSchedule": "2026-11-27 19:30"
+    "videoSchedule": "2026-11-24 17:30",
+    "podcastSchedule": "2026-11-24 19:30"
   },
   {
     "id": "ch13",
@@ -270,8 +274,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "內門總鋪師的搭棚排場、大鍋翻滾的二路菜蹄膀封肉，到工廠下班後夜市裡滾燙的蚵仔煎與鹽酥雞，島嶼人情味的最高峰。",
     "status": "planned",
     "file": "第13章_黑夜裡的流動盛宴_辦桌文化的鼎盛夜市宵夜經濟與客廳即工廠的深夜慰藉.md",
-    "videoSchedule": "2026-11-28 17:30",
-    "podcastSchedule": "2026-11-28 19:30"
+    "videoSchedule": "2026-11-25 17:30",
+    "podcastSchedule": "2026-11-25 19:30"
   },
   {
     "id": "ch14",
@@ -291,8 +295,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "將臺灣傳統粉圓丟入冰鎮奶茶的那一刻起，一場席捲東京、紐約、巴黎的黑色珍珠風暴，打造出跨國手搖茶的商業奇蹟。",
     "status": "planned",
     "file": "第14章_吸管裡的黑色奇蹟_春水堂翰林與珍珠奶茶席捲全球百億美元的商業神話.md",
-    "videoSchedule": "2026-11-29 17:30",
-    "podcastSchedule": "2026-11-29 19:30"
+    "videoSchedule": "2026-11-26 17:30",
+    "podcastSchedule": "2026-11-26 19:30"
   },
   {
     "id": "ch15",
@@ -312,8 +316,8 @@ const TAIWAN_FOOD_DATA = [
     "summary": "破布子、馬告、紅藜與地瓜發酵在法式手法中的重生，臺灣主廚以食物為媒介，向全球訴說四百年島嶼自信的味覺大結局。",
     "status": "planned",
     "file": "第15章_當代風土的米其林交響_從路邊攤到世界殿堂當代臺灣主廚的土地認同與新臺菜復興.md",
-    "videoSchedule": "2026-11-30 17:30",
-    "podcastSchedule": "2026-11-30 19:30"
+    "videoSchedule": "2026-11-27 17:30",
+    "podcastSchedule": "2026-11-27 19:30"
   }
 ];
 
