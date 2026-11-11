@@ -13,7 +13,17 @@
 
 🎧 戴上耳機，讓我們一起走進 17 世紀熱蘭遮城外波瀾壯闊的味蕾冒險！
 
-📖 完整史料專卷與文庫計畫：
-https://github.com/clive520/taiwan-history
+🌐 《舌尖上的臺灣》專題網頁與數位文庫：
+📖 本章完整深度圖文專卷：
+👉 https://clive520.github.io/taiwan-history/article.html?series=food&id=ch02
+
+🍱 《舌尖上的臺灣》飲食風土專頁（15章全集）：
+👉 https://clive520.github.io/taiwan-history/food.html
+
+🏛️ 臺灣歷史與風土數位文庫總門戶：
+👉 https://clive520.github.io/taiwan-history/
+
+💻 GitHub 開源文庫與史料考證專卷：
+👉 https://github.com/clive520/taiwan-history
 
 #舌尖上的臺灣 #Podcast #深度對談 #臺灣歷史 #熱蘭遮城 #大航海時代 #荷蘭東印度公司 #糖業 #臺南美食 #臺南甜 #西拉雅族 #梅花鹿 #荷蘭豆 #情人果 #人文風土

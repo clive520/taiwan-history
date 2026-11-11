@@ -23,9 +23,17 @@
 📍 田野地標：屏東三地門排灣族部落（WGS84: 22.7135, 120.6548）
 📖 考證文獻：陳第《東番記》、郁永河《裨海紀遊》、伊能嘉矩《臺灣踏查日記》、佐山融吉《蕃族調查報告書》
 
-🌐 完整圖文長卷與數位文庫：
-- 專題長卷：https://clive520.github.io/taiwan-history/article.html?series=food&id=ch01
-- 《舌尖上的臺灣》專頁：https://clive520.github.io/taiwan-history/food.html
-- GitHub 專案：https://github.com/clive520/taiwan-history
+🌐 《舌尖上的臺灣》專題網頁與數位文庫：
+📖 本章完整深度圖文專卷：
+👉 https://clive520.github.io/taiwan-history/article.html?series=food&id=ch01
+
+🍱 《舌尖上的臺灣》飲食風土專頁（15章全集）：
+👉 https://clive520.github.io/taiwan-history/food.html
+
+🏛️ 臺灣歷史與風土數位文庫總門戶：
+👉 https://clive520.github.io/taiwan-history/
+
+💻 GitHub 開源文庫與史料考證專卷：
+👉 https://github.com/clive520/taiwan-history
 
 #舌尖上的臺灣 #播客 #文化對談 #Cinavu #吉拿富 #馬告 #山胡椒 #刺蔥 #假酸漿 #排灣族 #南島語族 #飲食風土 #臺灣歷史 #NotebookLM
