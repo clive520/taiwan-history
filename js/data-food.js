@@ -41,7 +41,11 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["甘蔗", "黑糖", "鹿肉乾", "荷蘭豆", "芒果"],
     "summary": "十七世紀大員港灣的甜蜜洗禮，荷蘭人引進的水牛、甘蔗園與大航海時代的跨洋滋味交會。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/food_ch02/food_ch02_hero_banner.jpg",
+    "youtube": "anxoGeGVLz4",
+    "podcastYoutube": "zEvu1lJY54Q",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch02_podcast_deepdive.m4a",
     "file": "第02章_大航海的蔗香與鹿皮_荷西東印度公司糖業拓墾與熱帶果物登陸.md",
     "videoSchedule": "2026-11-14 17:30",
     "podcastSchedule": "2026-11-14 19:30"
