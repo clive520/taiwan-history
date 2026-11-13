@@ -93,7 +93,11 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["肉燥飯", "滷肉飯", "紅蔥頭", "黑豆蔭油", "豬油拌飯"],
     "summary": "紅蔥頭在豬油中激發的靈魂香氣，黑豆蔭油慢火熬煮的膠質琥珀，貫穿全臺三百年平民心靈之味。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/food_ch04/food_ch04_hero_banner.jpg",
+    "youtube": "NMVgUgVNX_w",
+    "podcastYoutube": "HQGjT51NLxg",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch04_podcast_deepdive.m4a",
     "file": "第04章_一碗肉臊的百年身世_黑豬肉紅蔥頭與醬油工藝如何奠定庶民味覺之王.md",
     "videoSchedule": "2026-11-16 17:30",
     "podcastSchedule": "2026-11-16 19:30"
