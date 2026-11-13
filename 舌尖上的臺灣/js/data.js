@@ -144,7 +144,11 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["新竹米粉", "客家粄條", "紅龜粿", "草仔粿", "米苔目"],
     "summary": "九降風吹拂下的細白米粉、客庄粄條與廟埕前祈願長壽平安的紅龜粿，稻米在祭儀與節令中的千變萬化。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/food_ch06/food_ch06_hero_banner.jpg",
+    "youtube": "EjvkHIRrDyM",
+    "podcastYoutube": "lqA98KpG-UQ",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch06_podcast_deepdive.m4a",
     "file": "第06章_廟埕香火與米食變奏_炊粿米苔目米粉與紅龜粿的歲時禮俗.md",
     "videoSchedule": "2026-11-18 17:30",
     "podcastSchedule": "2026-11-18 19:30"
