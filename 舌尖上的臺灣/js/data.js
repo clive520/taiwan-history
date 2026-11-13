@@ -118,7 +118,12 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["溫體牛肉湯", "善化肉品市場", "善化牛墟", "牛大骨高湯"],
     "summary": "從傳統農業社會「牛同人耕、終身不食」的虔敬禁忌，到凌晨黃金四小時現宰直送府城的清甜奇蹟。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/food_ch05/food_ch05_hero_banner.jpg",
+    "youtube": "YpdRBQLuqk8",
+    "podcastYoutube": "J6oTQXsu4QA",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch05_podcast_deepdive.m4a",
+
     "file": "第05章_水牛禁忌與清晨的甘甜_臺南溫體牛肉湯的破戒身世與屠宰冷鏈微革命.md",
     "videoSchedule": "2026-11-17 17:30",
     "podcastSchedule": "2026-11-17 19:30"
