@@ -169,7 +169,12 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["鱔魚意麵", "白糖粿", "椪糖", "臺南羹湯", "甘蔗糖蜜"],
     "summary": "鑊氣沖天的炒鱔魚與晶瑩羹湯中那抹濃郁的甜，解密蔗糖在府城從奢侈品炫耀到全城風雅的集體記憶。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/food_ch07/food_ch07_hero_banner.jpg",
+    "youtube": "Gpm45qlTNbU",
+    "podcastYoutube": "eydV0X9tq3w",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch07_podcast_deepdive.m4a",
+,
     "file": "第07章_甘甜的舌尖密碼_為什麼臺南人的菜這麼甜明鄭煮糖府城富庶與貴族炫耀心理學.md",
     "videoSchedule": "2026-11-19 17:30",
     "podcastSchedule": "2026-11-19 19:30"
