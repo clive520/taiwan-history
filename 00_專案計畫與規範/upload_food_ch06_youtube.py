@@ -50,42 +50,34 @@ def update_databases(v1_id, v2_id):
         c = db_path.read_text(encoding='utf-8')
         c_norm = c.replace("\r\n", "\n")
         
-        target_pattern = r'(\{\s*"id":\s*"ch06",[\s\S]*?"status":\s*)"planned"([\s\S]*?"file":\s*"第06章_廟埕香火與米食變奏_炊粿米苔目米粉與紅龜粿的歲時禮俗\.md",)'
-        
-        replacement = (
-            r'\1"published",\n'
-            f'    "bannerImage": "assets/images/food_ch06/food_ch06_hero_banner.jpg",\n'
-            f'    "youtube": "{v1_id}",\n'
-            f'    "podcastYoutube": "{v2_id}",\n'
-            f'    "audioFile": "{audio_release_url}",\n'
-            r'\2'
-        )
-        
+        # 替換 ch06 的 youtube 與 podcastYoutube
+        target_pattern = r'(\{\s*"id":\s*"ch06",[\s\S]*?"youtube":\s*")[^"]*("[\s\S]*?"podcastYoutube":\s*")[^"]*(")'
         if re.search(target_pattern, c_norm):
-            c_new = re.sub(target_pattern, replacement, c_norm)
+            c_new = re.sub(target_pattern, rf'\g<1>{v1_id}\g<2>{v2_id}\g<3>', c_norm)
             db_path.write_text(c_new, encoding='utf-8')
-            print(f"✅ 已成功更新 {db_path.relative_to(BASE_DIR)}！")
+            print(f"✅ 已成功更新 {db_path.relative_to(BASE_DIR)} 的 Video ID！")
         else:
-            print(f"[WARN] 未能在 {db_path.name} 找到 ch06 正則匹配位置，嘗試替代模式...")
-            p2 = r'("id":\s*"ch06"[\s\S]*?"status":\s*)"planned"'
-            if re.search(p2, c_norm):
-                c_new = re.sub(p2, r'\1"published"', c_norm)
-                insert_fields = (
-                    f'\n    "bannerImage": "assets/images/food_ch06/food_ch06_hero_banner.jpg",\n'
-                    f'    "youtube": "{v1_id}",\n'
-                    f'    "podcastYoutube": "{v2_id}",\n'
-                    f'    "audioFile": "{audio_release_url}",'
-                )
-                c_new = re.sub(r'("id":\s*"ch06"[\s\S]*?"status":\s*"published",)', r'\1' + insert_fields, c_new)
-                db_path.write_text(c_new, encoding='utf-8')
-                print(f"✅ 寬鬆匹配成功更新 {db_path.name}！")
+            # 尚未 published 的情形
+            p2 = r'(\{\s*"id":\s*"ch06",[\s\S]*?"status":\s*)"planned"([\s\S]*?"file":\s*"第06章_廟埕香火與米食變奏_炊粿米苔目米粉與紅龜粿的歲時禮俗\.md",)'
+            replacement = (
+                r'\1"published",\n'
+                f'    "bannerImage": "assets/images/food_ch06/food_ch06_hero_banner.jpg",\n'
+                f'    "youtube": "{v1_id}",\n'
+                f'    "podcastYoutube": "{v2_id}",\n'
+                f'    "audioFile": "{audio_release_url}",\n'
+                r'\2'
+            )
+            c_new = re.sub(p2, replacement, c_norm)
+            db_path.write_text(c_new, encoding='utf-8')
+            print(f"✅ 已成功登錄並發布 {db_path.name}！")
 
     # 2. 更新 Markdown 導讀影音超連結
     md_file = FOOD_DIR / "第06章_廟埕香火與米食變奏_炊粿米苔目米粉與紅龜粿的歲時禮俗.md"
     if md_file.exists():
         md_c = md_file.read_text(encoding='utf-8')
-        md_c = md_c.replace("https://youtu.be/pending_food_ch06_video", f"https://youtu.be/{v1_id}")
-        md_c = md_c.replace("https://youtu.be/pending_food_ch06_podcast", f"https://youtu.be/{v2_id}")
+        md_c = re.sub(r'https://youtu\.be/[a-zA-Z0-9_-]+（98°C在來米', f'https://youtu.be/{v1_id}（98°C在來米', md_c)
+        md_c = re.sub(r'https://youtu\.be/(?:pending_food_ch06_video|EjvkHIRrDyM)', f'https://youtu.be/{v1_id}', md_c)
+        md_c = re.sub(r'https://youtu\.be/(?:pending_food_ch06_podcast|lqA98KpG-UQ)', f'https://youtu.be/{v2_id}', md_c)
         md_file.write_text(md_c, encoding='utf-8')
         print(f"✅ 已成功更新專題長文導讀模組 Video ID：{md_file.name}！")
 
