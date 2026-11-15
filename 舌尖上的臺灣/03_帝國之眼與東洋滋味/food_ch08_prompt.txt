@@ -1,0 +1,34 @@
+# 《舌尖上的臺灣》第 08 章 影音生成與視覺插圖提示詞庫
+
+## 一、 NotebookLM Audio & Video 生成提示詞 (zh-TW)
+
+【主題】：改變世界的綠色奇蹟——蓬萊米誕生記：磯永吉、末永仁、竹子湖原種田與大橋頭米市的百年風雲
+【風格要求】：
+1. 繁體中文（臺灣習慣用語），對談風格自然生動、富有學術深度與歷史人文情懷。
+2. 兩位主持人一人偏向歷史背景與社會故事，另一人精通植物遺傳學、農業氣象學與食品物理化學，互相引導、提問與補充。
+3. 對談中自然融入生動的口語化語氣詞（「對吧？」、「真的！」、「沒錯」、「太不可思議了」、「你想想看」），展現極佳的互動感與呼吸律。
+4. 深度剖析關鍵概念：
+   - 1918 日本大正「米騷動」引發帝國糧食危機
+   - 溫帶粳稻引進亞熱帶低緯度的「早花」生理機制（短日照與高溫過早觸發花芽分化）
+   - 陽明山竹子湖火山封閉地形的天然花粉物理隔離與高冷微氣候屏障
+   - 中村種遭遇稻熱病全面潰敗的絕境
+   - 末永仁「幼苗插秧法（若苗插秧）」縮短苗床期打破早花限制
+   - 臺中65號（龜治 × 神力）跨品系雜交奇蹟，體內隱含臺灣高山陸稻感光鈍化基因
+   - 食品生物化學革命：在來米高直鏈澱粉（30%）迅速老化回生（Retrogradation）導致冷飯硬化；蓬萊米直鏈澱粉跳水至 16%，支鏈澱粉三維立體分支阻礙重結晶，創造柔軟Q彈的保水凝膠奇蹟
+   - 嘉南大圳水利通水與「三年輪作給水制」
+   - 「米糖相剋」資本政治經濟學：每甲種米利潤為甘蔗的兩倍以上引發的利益衝突
+   - 殖民地殘酷悖論：種白米的農民只能吃黑酸「番薯籤」，白米全數「飢餓輸出」往日本本土
+   - 大稻埕大橋頭米市的崛起、碼頭苦力與筒仔米糕、米苔目的庶民滋味
+   - 磯小屋田間筆記與戰後臺灣主食格局的永久奠定
+
+---
+
+## 二、 歷史插畫生成提示詞 (Midjourney / Imagen 3 規格)
+
+### 1. Hero Banner: 竹子湖原種田晨霧與磯永吉農學家
+- **Prompt**:
+  A breathtaking, historical cinematic oil painting by Rembrandt and Hiroshi Yoshida style. In 1923 early morning autumn at Zhuzihu (Bamboo Lake) volcanic valley in Yangmingshan Taiwan. Lush stepped terraced rice paddies surrounded by three towering volcanic peaks (Datun Mountain, Qixing Mountain) veiled in soft morning mountain mist and cool fog. Pure mountain spring water cascades down ancient stone irrigation channels. In the foreground, Dr. Eikichi Iso and Megumu Suenaga wearing vintage 1920s Japanese tropical agricultural researcher attire (white linen shirts, breeches, boots, straw sun hats) crouched by the rice terrace, meticulously examining a golden dewy rice panicle with a magnifying glass and wooden ruler. Golden dawn sunlight filtering through pine trees, illuminating the sparkling morning dew on ripe golden-green rice grains. Highly detailed, atmospheric lighting, rich natural color palette, 8k resolution, documentary realism, masterpieces, ultra-fine texture. --ar 16:9
+
+### 2. Craft & Technology: 臺中試驗場水稻人工去雄授粉微距工藝
+- **Prompt**:
+  A museum-grade classic fine art oil painting depicting 1924 Taichung Agricultural Experiment Station greenhouse in Taiwan. A dramatic close-up and intimate workshop setting filled with warm natural sunlight through glass panes. An agricultural scientist's skilled weathered hands using ultra-fine stainless steel tweezers and miniature scissors, delicately castrating and pollinating an individual delicate white rice flower (spikelet) of Kameji and Shinriki rice strains. Fine golden pollen dust suspended mid-air in beams of sunlight. Surrounding wooden desks filled with handwritten botanical field notebooks, glass Petri dishes with germinating seedlings, vintage microscope, brass vernier calipers, and test tubes. Rich warm amber tones, Caravaggio dramatic chiaroscuro lighting, emotional historical atmosphere, cinematic realism, 8k resolution. --ar 16:9

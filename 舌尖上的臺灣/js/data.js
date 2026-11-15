@@ -195,7 +195,12 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["磯永吉", "末永仁", "蓬萊米", "在來米", "竹子湖原種田"],
     "summary": "陽明山竹子湖梯田裡的遺傳學奇蹟，蓬萊米如何取代乾癟的在來米，重塑全東亞的家庭餐桌餐食格局。",
-    "status": "planned",
+    "status": "published",
+    "bannerImage": "assets/images/food_ch08/food_ch08_hero_banner.jpg",
+    "youtube": "-HtOFsVA6ik",
+    "podcastYoutube": "2y9cMM5SjQ4",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch08_podcast_deepdive.m4a",
+,
     "file": "第08章_改變世界的綠色奇蹟_磯永吉的蓬萊米育種嘉南平原大穀倉與日本米食革命.md",
     "videoSchedule": "2026-11-20 17:30",
     "podcastSchedule": "2026-11-20 19:30"
