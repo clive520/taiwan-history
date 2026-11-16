@@ -221,7 +221,9 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["鐵路便當", "高砂麥酒", "喫茶店洋食", "日式咖哩", "奮起湖便當"],
     "summary": "1908 年縱貫鐵路通車，車廂窗邊飄出的排骨香與木片便當，以及生啤酒、喫茶店洋食帶來的摩登都市節奏。",
-    "status": "planned",
+    "status": "published",
+      "videoId": "zHWD3F2Gejo",
+      "podcastId": "Z1xU5zyDSk4",
     "file": "第09章_汽笛聲中的木片便當_縱貫鐵路通車生啤酒喫茶店與鐵路便當的摩登生活.md",
     "videoSchedule": "2026-11-21 17:30",
     "podcastSchedule": "2026-11-21 19:30"
@@ -242,7 +244,9 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["東方美人茶", "膨風茶", "小綠葉蟬", "約翰陶德", "李春生"],
     "summary": "小綠葉蟬叮咬造就的蜜香奇蹟，大稻埕洋行千帆競發，臺灣烏龍茶如何名揚英倫、征服維多利亞女王。",
-    "status": "planned",
+    "status": "published",
+      "videoId": "zHWD3F2Gejo",
+      "podcastId": "Z1xU5zyDSk4",
     "file": "第10章_山嵐間的東方美人_大稻埕洋行新竹苗栗客庄膨風茶與征服世界的烏龍傳奇.md",
     "videoSchedule": "2026-11-22 17:30",
     "podcastSchedule": "2026-11-22 19:30"

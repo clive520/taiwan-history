@@ -1,0 +1,21 @@
+# 《舌尖上的臺灣》第 09 章：汽笛聲中的木片便當——視覺生成與影音提示詞庫
+
+## 一、 NotebookLM 影音生成設定規範
+- **語言模式**：必須明確指定 `language: "zh-TW"`（繁體中文）。
+- **說明短片（Video Overview）**：
+  - 核心主線：聚焦 1908 縱貫鐵路全通、時間觀念建立、經木盒吸濕防腐物性科學、月台叫賣便當文化、以及高砂生啤酒現代消費。
+  - 風格語調：節奏緊湊、知識密度高、充滿歷史畫面感與人文溫度。
+- **播客長片（Audio Deep Dive）**：
+  - 角色設定：兩位專業歷史與飲食文化對談人。
+  - 對話深度：從長谷川謹介鐵路工程、鐵道飯店奢華洋食，談到經木盒物性、波麗路留聲機相親、山水亭文人沙龍、女給制度、以及高砂麥酒底層發酵科技。
+  - 語音節奏：語意自然流暢、對話感強烈、帶有知性與幽默感。
+
+## 二、 歷史視覺插畫提示詞（Prompt Engineering）
+
+### 1. 橫幅主視覺：蒸氣火車、鐵道月台與木片便當（Hero Banner）
+- **Prompt**:
+  "Cinematic historical documentary illustration, Taisho era Taiwan in 1910s. A classic black steam locomotive engine emitting billowing white steam at a train station platform. In the foreground on a rustic wooden bench, an open traditional Kyogi thin-wood bentwood bento box revealing glistening white steamed rice, a red pickled plum in the center, golden tamagoyaki egg, grilled salmon, and simmered vegetables. Warm morning sunlight casting golden Tyndall rays through the rising steam. Photorealistic oil painting texture, rich nostalgic tones, amber, deep iron black, forest green, highly detailed 8k resolution, cinematic lighting, masterpiece --ar 16:9"
+
+### 2. 摩登都市夜生活：波麗路喫茶店與高砂生啤酒（Modern Urban Life）
+- **Prompt**:
+  "Atmospheric 1930s Shōwa Modernism cafe interior in Taipei Dadaocheng. In a warm, moody jazz cafe, glowing orange vintage vacuum tube audio amplifiers in background. On a dark polished mahogany table sits an elegant siphon drip coffee setup, a glass cup of dark black coffee, alongside a heavy glass mug filled with golden draft beer with thick creamy white foam head and condensation beads. Elegant art deco interior, brass lamps, vintage gramophone records, Rembrandt lighting, deep amber and burgundy palette, highly detailed, photorealistic 8k, cinematic masterpiece --ar 16:9"
