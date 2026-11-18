@@ -245,8 +245,8 @@ const TAIWAN_FOOD_DATA = [
     "figures": ["東方美人茶", "膨風茶", "小綠葉蟬", "約翰陶德", "李春生"],
     "summary": "小綠葉蟬叮咬造就的蜜香奇蹟，大稻埕洋行千帆競發，臺灣烏龍茶如何名揚英倫、征服維多利亞女王。",
     "status": "published",
-      "videoId": "zHWD3F2Gejo",
-      "podcastId": "Z1xU5zyDSk4",
+      "videoId": "IQJ-ciAwa-c",
+      "podcastId": "rlhbgn4T1z8",
     "file": "第10章_山嵐間的東方美人_大稻埕洋行新竹苗栗客庄膨風茶與征服世界的烏龍傳奇.md",
     "videoSchedule": "2026-11-22 17:30",
     "podcastSchedule": "2026-11-22 19:30"
@@ -267,7 +267,9 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["紅燒牛肉麵", "岡山豆瓣醬", "老兵麵攤", "酸菜", "牛筋牛腩"],
     "summary": "四川沒有「川味紅燒牛肉麵」！走進岡山眷村空軍老兵以蠶豆醬、牛骨紅湯與臺灣酸菜拼湊出的一解鄉愁混血神作。",
-    "status": "planned",
+    "status": "published",
+      "videoId": "IQJ-ciAwa-c",
+      "podcastId": "rlhbgn4T1z8",
     "file": "第11章_那一碗鄉愁的紅湯_岡山豆瓣醬四川老兵與臺灣紅燒牛肉麵的混血傳奇.md",
     "videoSchedule": "2026-11-23 17:30",
     "podcastSchedule": "2026-11-23 19:30"
