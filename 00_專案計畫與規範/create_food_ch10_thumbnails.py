@@ -132,31 +132,61 @@ draw_yt.text((1005, 612), "8分鐘精華導讀", fill=(255, 255, 255), font=f_yt
 
 yt_thumb.save("assets/images/food_ch10/food_ch10_youtube_thumbnail.jpg", quality=95)
 
-# 4. 播客縮圖 (1280x720): 琥珀茶湯 + 洋行帆船（茶金奢華風）
-pod_img = Image.open(os.path.join(temp_dir, "teacup.jpg")).convert("RGB").resize((1280, 720), Image.Resampling.LANCZOS)
-pod_thumb = apply_tea_gold_filter(pod_img, warm_tint=(250, 210, 150), vignette_strength=0.6)
+# 4. 播客縮圖 (1280x720): 博物館級 1870 大稻埕洋行與東方美人油畫（嚴格 16:9 等比無變形）
+master_ai_path = "assets/images/food_ch10/food_ch10_oriental_beauty_ai_master.jpg"
+if os.path.exists(master_ai_path):
+    pod_img = Image.open(master_ai_path).convert("RGB")
+else:
+    pod_img = Image.open(os.path.join(temp_dir, "teacup.jpg")).convert("RGB")
 
-draw_pod = ImageDraw.Draw(pod_thumb, "RGBA")
-for x in range(0, 950):
-    alpha = int(230 * (1 - (x / 950)))
-    draw_pod.rectangle([x, 0, x+1, 720], fill=(10, 8, 5, alpha))
+from PIL import ImageOps
+pod_thumb = ImageOps.fit(pod_img, (1280, 720), method=Image.Resampling.LANCZOS, centering=(0.5, 0.5))
 
-draw_pod.rectangle([60, 60, 520, 110], fill=(130, 80, 30, 240))
-draw_pod.text((80, 68), "【舌尖上的臺灣 深度播客】", fill=(255, 255, 255), font=f_yt_tag)
+enhancer = ImageEnhance.Color(pod_thumb)
+pod_thumb = enhancer.enhance(1.06)
+enhancer = ImageEnhance.Contrast(pod_thumb)
+pod_thumb = enhancer.enhance(1.08)
 
-draw_pod.text((60, 140), "山嵐間的", fill=(255, 255, 255), font=f_yt_title)
-draw_pod.text((60, 220), "東方美人", fill=(255, 200, 70), font=f_yt_title)
+overlay_pod = Image.new("RGBA", (1280, 720), (0, 0, 0, 0))
+draw_ol = ImageDraw.Draw(overlay_pod)
+for x in range(0, 960):
+    factor = 1 - (x / 960)**1.3
+    alpha = int(245 * max(0, factor))
+    draw_ol.rectangle([x, 0, x+1, 720], fill=(12, 10, 8, alpha))
+pod_thumb.paste(Image.alpha_composite(Image.new("RGBA", (1280, 720), (0, 0, 0, 0)), overlay_pod), (0, 0), overlay_pod)
 
-draw_pod.rectangle([60, 320, 720, 380], fill=(20, 20, 25, 220))
-draw_pod.text((80, 332), "大稻埕茶金歲月與膨風茶傳奇", fill=(255, 220, 130), font=f_yt_sub)
+f_bullet_icon = ImageFont.truetype(font_bold, 22)
+f_extra = ImageFont.truetype(font_bold, 25)
+f_badge = ImageFont.truetype(font_bold, 24)
+draw_pod = ImageDraw.Draw(pod_thumb)
 
-draw_pod.text((65, 415), "🎙️ 小綠葉蟬刺吸與茶樹分子自衛武器", fill=(235, 235, 235), font=f_yt_extra)
-draw_pod.text((65, 465), "🎙️ 陶德與李春生：寶順洋行與茶底銀信貸", fill=(235, 235, 235), font=f_yt_extra)
-draw_pod.text((65, 515), "🎙️ 萬名大稻埕揀茶女工與近代女性受薪", fill=(235, 235, 235), font=f_yt_extra)
-draw_pod.text((65, 565), "🎙️ 新竹州特等獎一斤換數棟房的膨風神話", fill=(235, 235, 235), font=f_yt_extra)
+def draw_text_shadow(xy, text, font, fill, shadow_fill=(5, 4, 3), offset=(2, 2)):
+    x, y = xy
+    draw_pod.text((x + offset[0], y + offset[1]), text, font=font, fill=shadow_fill)
+    draw_pod.text((x, y), text, font=font, fill=fill)
 
-draw_pod.rectangle([960, 600, 1220, 660], fill=(160, 60, 20, 230))
-draw_pod.text((980, 612), "PODCAST 深度對談", fill=(255, 255, 255), font=f_yt_tag)
+draw_pod.rounded_rectangle([60, 52, 540, 106], radius=10, fill=(150, 75, 20), outline=(225, 160, 80), width=2)
+draw_text_shadow((82, 63), "【舌尖上的臺灣 深度播客】", f_tag, (255, 255, 255))
+
+draw_text_shadow((60, 130), "山嵐間的", f_yt_title, (255, 250, 240), offset=(3, 3))
+draw_text_shadow((60, 212), "東方美人", f_yt_title, (255, 205, 65), offset=(3, 3))
+
+draw_pod.rounded_rectangle([60, 312, 690, 372], radius=8, fill=(28, 22, 18, 230), outline=(190, 140, 60), width=2)
+draw_text_shadow((80, 324), "大稻埕茶金歲月與膨風茶傳奇", f_sub, (255, 225, 140))
+
+bullets = [
+    "小綠葉蟬刺吸與茶樹分子自衛武器",
+    "陶德與李春生：寶順洋行與茶底銀信貸",
+    "萬名大稻埕揀茶女工與近代女性受薪",
+    "新竹州特等獎一斤換數棟房的膨風神話"
+]
+for i, b in enumerate(bullets):
+    y = 405 + i * 50
+    draw_text_shadow((65, y+1), "◆", f_bullet_icon, (255, 195, 60), offset=(2, 2))
+    draw_text_shadow((95, y), b, f_extra, (245, 245, 245), offset=(2, 2))
+
+draw_pod.rounded_rectangle([60, 620, 390, 672], radius=8, fill=(175, 55, 20), outline=(235, 120, 70), width=2)
+draw_text_shadow((80, 631), "PODCAST 雙人深度對談", f_badge, (255, 255, 255))
 
 pod_thumb.save("assets/images/food_ch10/food_ch10_podcast_thumbnail.jpg", quality=95)
 
