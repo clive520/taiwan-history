@@ -159,10 +159,14 @@ def get_authenticated_service(client_secrets_file=None, token_file=None):
                 str(secret_path), SCOPES
             )
             class UrlSaverPrompt:
+                def __init__(self, flow_obj):
+                    self.flow = flow_obj
                 def format(self, **kwargs):
                     url = kwargs.get("url", "")
                     try:
                         (Path(__file__).parent / "youtube_auth_url.txt").write_text(url, encoding="utf-8")
+                        if hasattr(self.flow, "code_verifier") and self.flow.code_verifier:
+                            (Path(__file__).parent / "youtube_code_verifier.txt").write_text(self.flow.code_verifier, encoding="utf-8")
                     except Exception:
                         pass
                     return f"\n{'='*70}\n👉 請在瀏覽器中開啟授權連結：\n{url}\n{'='*70}\n🌐 正在等待授權回傳...\n"
@@ -173,14 +177,16 @@ def get_authenticated_service(client_secrets_file=None, token_file=None):
                     port=8080,
                     prompt="consent",
                     access_type="offline",
-                    authorization_prompt_message=UrlSaverPrompt()
+                    authorization_prompt_message=UrlSaverPrompt(flow),
+                    success_message="授權成功！正在自動為您上傳全新背景的 Podcast 影片並替換舊排程，請稍候。"
                 )
             except Exception:
                 creds = flow.run_local_server(
                     port=0,
                     prompt="consent",
                     access_type="offline",
-                    authorization_prompt_message=UrlSaverPrompt()
+                    authorization_prompt_message=UrlSaverPrompt(flow),
+                    success_message="授權成功！正在自動為您上傳全新背景的 Podcast 影片並替換舊排程，請稍候。"
                 )
 
         # 儲存 Token 到本地以及共用雲端硬碟 (若可用)

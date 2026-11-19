@@ -25,3 +25,5 @@ client_secret*.json
 *token*.json
 *.uploaded
 
+*auth_url*.txt
+*code_verifier*.txt
