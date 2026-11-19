@@ -174,7 +174,6 @@ const TAIWAN_FOOD_DATA = [
     "youtube": "Gpm45qlTNbU",
     "podcastYoutube": "eydV0X9tq3w",
     "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch07_podcast_deepdive.m4a",
-,
     "file": "第07章_甘甜的舌尖密碼_為什麼臺南人的菜這麼甜明鄭煮糖府城富庶與貴族炫耀心理學.md",
     "videoSchedule": "2026-11-19 17:30",
     "podcastSchedule": "2026-11-19 19:30"
@@ -200,7 +199,6 @@ const TAIWAN_FOOD_DATA = [
     "youtube": "-HtOFsVA6ik",
     "podcastYoutube": "2y9cMM5SjQ4",
     "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch08_podcast_deepdive.m4a",
-,
     "file": "第08章_改變世界的綠色奇蹟_磯永吉的蓬萊米育種嘉南平原大穀倉與日本米食革命.md",
     "videoSchedule": "2026-11-20 17:30",
     "podcastSchedule": "2026-11-20 19:30"
@@ -222,8 +220,12 @@ const TAIWAN_FOOD_DATA = [
     "figures": ["鐵路便當", "高砂麥酒", "喫茶店洋食", "日式咖哩", "奮起湖便當"],
     "summary": "1908 年縱貫鐵路通車，車廂窗邊飄出的排骨香與木片便當，以及生啤酒、喫茶店洋食帶來的摩登都市節奏。",
     "status": "published",
-      "videoId": "zHWD3F2Gejo",
-      "podcastId": "Z1xU5zyDSk4",
+    "bannerImage": "assets/images/food_ch09/food_ch09_hero_banner.jpg",
+    "youtube": "zHWD3F2Gejo",
+    "podcastYoutube": "Z1xU5zyDSk4",
+    "videoId": "zHWD3F2Gejo",
+    "podcastId": "Z1xU5zyDSk4",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch09_podcast_deepdive.m4a",
     "file": "第09章_汽笛聲中的木片便當_縱貫鐵路通車生啤酒喫茶店與鐵路便當的摩登生活.md",
     "videoSchedule": "2026-11-21 17:30",
     "podcastSchedule": "2026-11-21 19:30"
@@ -245,8 +247,12 @@ const TAIWAN_FOOD_DATA = [
     "figures": ["東方美人茶", "膨風茶", "小綠葉蟬", "約翰陶德", "李春生"],
     "summary": "小綠葉蟬叮咬造就的蜜香奇蹟，大稻埕洋行千帆競發，臺灣烏龍茶如何名揚英倫、征服維多利亞女王。",
     "status": "published",
-      "videoId": "IQJ-ciAwa-c",
-      "podcastId": "RT2XuSat6Ew",
+    "bannerImage": "assets/images/food_ch10/food_ch10_hero_banner.jpg",
+    "youtube": "IQJ-ciAwa-c",
+    "podcastYoutube": "RT2XuSat6Ew",
+    "videoId": "IQJ-ciAwa-c",
+    "podcastId": "RT2XuSat6Ew",
+    "audioFile": "https://github.com/clive520/taiwan-history/releases/download/v1.0.0/food_ch10_podcast_deepdive.m4a",
     "file": "第10章_山嵐間的東方美人_大稻埕洋行新竹苗栗客庄膨風茶與征服世界的烏龍傳奇.md",
     "videoSchedule": "2026-11-22 17:30",
     "podcastSchedule": "2026-11-22 19:30"
@@ -267,9 +273,8 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["紅燒牛肉麵", "岡山豆瓣醬", "老兵麵攤", "酸菜", "牛筋牛腩"],
     "summary": "四川沒有「川味紅燒牛肉麵」！走進岡山眷村空軍老兵以蠶豆醬、牛骨紅湯與臺灣酸菜拼湊出的一解鄉愁混血神作。",
-    "status": "published",
-      "videoId": "IQJ-ciAwa-c",
-      "podcastId": "RT2XuSat6Ew",
+    "status": "planned",
+    "bannerImage": "assets/images/food_ch11/food_ch11_hero_banner.jpg",
     "file": "第11章_那一碗鄉愁的紅湯_岡山豆瓣醬四川老兵與臺灣紅燒牛肉麵的混血傳奇.md",
     "videoSchedule": "2026-11-23 17:30",
     "podcastSchedule": "2026-11-23 19:30"
@@ -368,3 +373,9 @@ const FOOD_PERIODS_DATA = [
   { id: "postwar-fusion", name: "眷村新香" },
   { id: "contemporary-global", name: "世界舞台" }
 ];
+
+
+if (typeof window !== "undefined") {
+  window.TAIWAN_FOOD_DATA = TAIWAN_FOOD_DATA;
+  window.FOOD_PERIODS_DATA = FOOD_PERIODS_DATA;
+}
