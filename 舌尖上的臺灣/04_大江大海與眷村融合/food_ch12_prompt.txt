@@ -1,0 +1,21 @@
+# 《舌尖上的臺灣》第 12 章：晨光裡的麵粉香——視覺生成與影音提示詞庫
+
+## 一、 NotebookLM 影音生成設定規範
+- **語言模式**：必須明確指定 `language: "zh-TW"`（繁體中文）。
+- **說明短片（Video Overview）**：
+  - 核心主線：聚焦冷戰地緣政治與美國公法 480 號（PL 480）、中美合作麵粉袋縫成短褲的童年身體記憶、農復會（JCRR）李國鼎與沈宗瀚「以麵代米」的賺外匯經濟戰略、永和中正橋頭退伍老兵從克難竹棚到 24 小時早餐名店的崛起；硬核科學解碼油酥分層物理、炭火貼爐高溫輻射、油條化學產氣膨脹，以及鹹豆漿大豆球蛋白等電點（pH 4.5）凝乳奇蹟。
+  - 語音風格：宏闊生動、充滿時代情懷與煙火氣、富有食品科學與社會經濟學洞見。
+- **播客長片（Audio Deep Dive）**：
+  - 角色設定：兩位專業歷史學者與飲食文化專家深度對談。
+  - 對話深度：從梁實秋與林海音的晨間飲食散文切入，剖析外省老兵如何以一把擀麵棍與泥爐在南方島嶼立足求生；細說眷村「全家包水餃」的北方儀式感與大鐵鍋「點水三回」的物理熟化；深究臺灣本土閩客族群如何從「不吃米不算吃飯」到全面接納燒餅油條；最後探討阜杭豆漿米其林必比登排隊潮與永和豆漿進軍全球的文化認同。
+  - 語音節奏：自然生動、層次分明、語調富含人情味與知性幽默。
+
+## 二、 歷史視覺插畫提示詞（Prompt Engineering）
+
+### 1. 橫幅主視覺：晨光麵粉攤、炭爐厚燒餅與金黃油條（Hero Banner）
+- **Prompt**:
+  "Cinematic historical documentary illustration of a 1950s Taipei dawn breakfast stall near Zhongzheng Bridge. Warm golden morning twilight filtering through bamboo eaves and rising aromatic steam. In the foreground, an exquisitely detailed rustic wooden table with freshly baked thick sesame flatbreads (燒餅) showing golden crisp crust and toasted white sesame seeds, paired with giant golden-brown crispy fried crullers (油條), a steaming bowl of rich savory soy milk with chili oil and scallions, and a porcelain cup of fresh soy milk. In the background, an aging veteran baker with a white undershirt skillfully slapping dough onto the glowing inner clay wall of a cylindrical charcoal oven. Photorealistic oil painting aesthetic, nostalgic warm amber and cream tones, rich flour textures, 8k resolution, cinematic masterpiece --ar 16:9"
+
+### 2. 歷史工藝：揉麵揚塵、貼爐炭烤與熱油翻騰（Heritage & Dough Craft）
+- **Prompt**:
+  "Atmospheric 1950s Taiwan traditional breakfast kitchen split composition. On one side, experienced hands vigorously kneading silky wheat dough on a worn wooden table, white flour dust suspended like stars in a warm Tyndall sunbeam, vintage cotton flour sacks stamped with 'Sino-American Cooperation' and two clasped hands visible in corner. On the other side, an open sizzling iron oil trough where twin dough strips instantly puff into giant golden hollow crullers under long bamboo chopsticks, glowing red charcoal embers at the furnace base. Nostalgic vintage film tones, golden hour lighting, deep shadows, emotional historical storytelling, photorealistic oil painting, 8k, masterpiece --ar 16:9"

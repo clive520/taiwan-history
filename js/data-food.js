@@ -297,7 +297,9 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["美援麵粉", "永和豆漿", "燒餅油條", "韭菜水餃", "蔥油餅"],
     "summary": "中美合作麵粉袋縫成短褲的歲月，炭爐旁貼爐烤出的厚燒餅、大鐵鍋裡沸騰的水餃，北方麵食如何徹底植根南方島嶼。",
-    "status": "planned",
+    "status": "published",
+      "videoId": "2AeI9_Y65Fo",
+      "podcastId": "vC_9bE8zFaw",
     "file": "第12章_晨光裡的麵粉香_美援麵粉燒餅油條清漿與眷村水餃烙餅的庶民突圍.md",
     "videoSchedule": "2026-11-24 17:30",
     "podcastSchedule": "2026-11-24 19:30"
