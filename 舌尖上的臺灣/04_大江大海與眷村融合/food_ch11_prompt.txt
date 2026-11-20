@@ -1,0 +1,21 @@
+# 《舌尖上的臺灣》第 11 章：那一碗鄉愁的紅湯——視覺生成與影音提示詞庫
+
+## 一、 NotebookLM 影音生成設定規範
+- **語言模式**：必須明確指定 `language: "zh-TW"`（繁體中文）。
+- **說明短片（Video Overview）**：
+  - 核心主線：聚焦四川老兵在臺灣岡山改良豆瓣醬、從成都「小碗牛肉」演化為臺灣獨創「紅燒牛肉麵」、美援麵粉與打破敬牛傳統的社會變遷，以及豆瓣醬美拉德反應、牛腱筋膜明膠水解與發酵酸菜協同去膩的分子烹飪密碼。
+  - 語音風格：宏闊厚重、充滿歷史滄桑與人情溫度、富有飲食科學與文化融合的洞見。
+- **播客長片（Audio Deep Dive）**：
+  - 角色設定：兩位專業歷史學者與飲食文化專家深度對談。
+  - 對話深度：從岡山空軍眷村與劉明德改良黃豆豆瓣醬談起，深究敬牛農耕戒律如何被戰後都市化瓦解；詳論川菜與臺灣本土食材的混血奇蹟；解析梁實秋《雅舍談吃》中「四川本土無紅燒牛肉麵」的驚嘆；探討牛肉麵節與臺灣國民美食的文化認同。
+  - 語音節奏：自然生動、層次分明、語調富含人情味與知性幽默。
+
+## 二、 歷史視覺插畫提示詞（Prompt Engineering）
+
+### 1. 橫幅主視覺：眷村牛肉麵攤與濃郁紅湯（Hero Banner）
+- **Prompt**:
+  "Cinematic historical documentary illustration of a 1950s Taipei military dependents' village (眷村) evening street corner. A rustic wooden food stall cart with warm glowing tungsten hanging light bulb and rising aromatic steam. In the foreground, an exquisitely detailed large ceramic bowl of Taiwanese red-braised beef noodles (紅燒牛肉麵): thick glossy crimson broth with amber chili oil droplets, thick gelatinous tender beef shank slices, glistening tendon, chewy hand-pulled noodles, topped with vivid green chopped scallions and golden fermented pickled mustard greens (酸菜). Simmering heavy iron pot in background, retro earthenware jars labeled 'Gangshan Bean Paste'. Evocative nostalgic warm lighting, photorealistic oil painting aesthetic, rich textures, 8k resolution, cinematic masterpiece --ar 16:9"
+
+### 2. 歷史風雲：岡山日曬醬缸與四川老兵掌勺（Heritage & Craft）
+- **Prompt**:
+  "Atmospheric 1950s Taiwan historical scene split composition. On one side, rows of traditional large clay fermentation urns basking under the blazing Southern Taiwan sun in Gangshan, fermented soybean and chili paste maturing with rich reddish-brown glaze. On the other side, an aging Sichuan veteran soldier in a simple white undershirt skillfully ladling glowing red braised beef broth at an open-air alley stall, surrounded by hungry patrons sitting on wooden stools under corrugated tin roofs. Nostalgic vintage film tones, golden hour sunlight, deep shadows, emotional historical storytelling, photorealistic oil painting, 8k, masterpiece --ar 16:9"
