@@ -366,7 +366,9 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["新臺菜", "RAW", "山海樓", "發酵食材", "在地風土", "全系列大結語"],
     "summary": "破布子、馬告、紅藜與地瓜發酵在法式手法中的重生，臺灣主廚以食物為媒介，向全球訴說四百年島嶼自信的味覺大結局。",
-    "status": "planned",
+    "status": "published",
+      "videoId": "QQ7truGQjtg",
+      "podcastId": "QzIONR-qAXM",
     "file": "第15章_當代風土的米其林交響_從路邊攤到世界殿堂當代臺灣主廚的土地認同與新臺菜復興.md",
     "videoSchedule": "2026-11-27 17:30",
     "podcastSchedule": "2026-11-27 19:30"

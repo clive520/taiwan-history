@@ -1,0 +1,21 @@
+# 《舌尖上的臺灣》第 15 章：當代風土的米其林交響——視覺生成與影音提示詞庫
+
+## 一、 NotebookLM 影音生成設定規範
+- **語言模式**：必須明確指定 `language: "zh-TW"`（繁體中文）。
+- **說明短片（Video Overview）**：
+  - 核心主線：聚焦臺灣當代高級餐飲從 1990 年代盲目崇拜西方進口奢華食材（黑松露、魚子醬、鵝肝），到 WTO 衝擊後的精緻農業轉型與米其林指南登臺（2018 臺北、2020 臺中、2022 臺南高雄）；米其林必比登推介賦予路邊攤（華西街黑金滷肉飯、夜市蚵仔煎、胡椒餅）文化平權；名廚江振誠以「八角哲學」在大直創立 RAW，解構三杯雞、炭烤燒番麥、高山愛玉香檳，以二十四節氣展開十年風土味覺策展；主廚何順凱中西雙修，創立態芮（Taïrroir）以法式精緻技法重構茶葉蛋與鹹豆漿（「迷思」）、大甲芋頭金沙（「泥解」），勇奪全球首家三星臺灣料理；山海樓攜手蓬萊閣傳人黃德興老師傅搶救百年失傳手工酒家菜（金銀燒豬、肚包雞）與米其林綠星有機溯源；分子感官植物學揭秘原民馬告（檸檬醛、萜烯低溫油萃）、刺蔥（食茱萸細胞破壁）、破布子（水溶性多醣乳化與麩胺酸呈味協同）；全書四百年（南島野豬火種到當代米其林）的大結語與文化自信。
+  - 語音風格：深情優美、宏大磅礡、知性深刻、兼具硬核分子烹飪科學與濃烈土地認同。
+- **播客長片（Audio Deep Dive）**：
+  - 角色設定：兩位資深文化評論家、美食哲學家與當代餐飲觀察家展開熱烈深度對談。
+  - 對話深度：從 2023 年 Taïrroir 態芮奪得米其林三星與 RAW 十年謝幕震撼切入；深度討論為什麼臺灣飲食曾有「文化自卑」，以及主廚們如何找回「臺灣味」的自信；趣味剖析路邊攤茶葉蛋、鹹豆漿、金沙芋泥在法式餐盤裡的降維打擊與感官驚喜；詳解馬告如何以一己之力打破西方黑胡椒壟斷；回顧《舌尖上的臺灣》從第 01 章南島先民的石板烤肉一路走到第 15 章米其林三星的四百年大史詩；感嘆臺灣飲食「不問出身、海納百川、隨時擁抱世界」的生命韌性。
+  - 語音節奏：富有智慧、充滿默契笑聲、飽含人文溫度與震撼感動。
+
+## 二、 歷史視覺插畫提示詞（Prompt Engineering）
+
+### 1. 橫幅主視覺：米其林三星主廚料理檯與高山原生風土（Hero Banner）
+- **Prompt**:
+  "Cinematic documentary masterpiece illustration of a world-class contemporary Taiwanese fine dining kitchen. In the center, an elite chef in immaculate white chef attire meticulously using precision plating tweezers to place delicate indigenous Makauy mountain peppercorns and edible mountain herbs onto an exquisite, sculptural dish resting on deep slate black ceramic. In the background, dramatic curved warm architectural wood contours evoking Taiwan's Central Mountain Range, soft warm morning spotlight illumination, gleaming stainless steel kitchen stations, misty high-mountain forest silhouettes visible through floor-to-ceiling glass. Fine art realism oil painting aesthetic, luminous lighting, golden amber and jade green accents, 8k resolution, award-winning culinary photography style --ar 16:9"
+
+### 2. 歷史工藝：失傳酒家菜肚包雞與現代分子茶葉蛋（Culinary Craft）
+- **Prompt**:
+  "Atmospheric retro-modern split culinary craft composition. On the left side, a legendary Taiwanese master chef in a traditional vintage banquet kitchen delicately carving an elaborate heritage stuffed melon and ballotine chicken (Du Bao Ji), rich steaming amber broth glistening in a clay pot under warm tungsten glow, representing 1930s Dadaocheng grand banquet cuisine. On the right side, an ultra-modern fine dining molecular gastronomy creation: a pristine slow-cooked onsen egg floating in a light tea-infused consommé, topped with delicate savory soy milk foam, crisp micro crullers, and aromatic herbal green oil on fine porcelain. Harmonious blend of historical heritage and avant-garde culinary art, museum quality oil painting, 8k resolution --ar 16:9"
