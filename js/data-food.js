@@ -320,7 +320,9 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["總鋪師", "辦桌八仙桌", "封肉", "紅蟳米糕", "蚵仔煎", "鹽酥雞"],
     "summary": "內門總鋪師的搭棚排場、大鍋翻滾的二路菜蹄膀封肉，到工廠下班後夜市裡滾燙的蚵仔煎與鹽酥雞，島嶼人情味的最高峰。",
-    "status": "planned",
+    "status": "published",
+      "videoId": "Ab8SfvsQ9Ck",
+      "podcastId": "kHOCQnoozaY",
     "file": "第13章_黑夜裡的流動盛宴_辦桌文化的鼎盛夜市宵夜經濟與客廳即工廠的深夜慰藉.md",
     "videoSchedule": "2026-11-25 17:30",
     "podcastSchedule": "2026-11-25 19:30"

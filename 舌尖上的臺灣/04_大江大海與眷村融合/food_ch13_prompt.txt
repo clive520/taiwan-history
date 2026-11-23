@@ -1,0 +1,21 @@
+# 《舌尖上的臺灣》第 13 章：黑夜裡的流動盛宴——視覺生成與影音提示詞庫
+
+## 一、 NotebookLM 影音生成設定規範
+- **語言模式**：必須明確指定 `language: "zh-TW"`（繁體中文）。
+- **說明短片（Video Overview）**：
+  - 核心主線：聚焦高雄內門「總鋪師之鄉」的惡地與武術傳奇、封街搭棚的流動宴席空間建築學；1970年代謝東閔「客廳即工廠」政策與加工出口區三班倒勞動催生全臺夜市宵夜經濟；硬核食品科學解析：大封肉I型膠原蛋白在85°C微沸慢燉下的明膠化、白菜滷扁魚肌苷酸與麩胺酸的8倍鮮味相乘核爆、蚵仔煎雙澱粉羽衣膠化、粗粒地瓜粉炸鹽酥雞的水汽阻隔與九層塔丁香酚高溫炸裂、以及菜尾湯二次慢燉的酯化熟成美學。
+  - 語音風格：熱烈豪邁、富有時代煙火氣與鄉土溫情、兼具硬核食品分子科學與社會經濟學洞見。
+- **播客長片（Audio Deep Dive）**：
+  - 角色設定：兩位專業歷史學者與飲食人類學專家深度對談。
+  - 對話深度：從林文月《飲膳作樂》與焦桐《臺灣味道》的文學筆觸切入，剖析內門總鋪師如何調度天地風土、在三個泥火灶上變出千人盛宴；詳論臺灣代工外銷奇蹟背後，數十萬黑手青年與工廠女工在深夜夜市裡的卡路里救贖；解密辦桌十二道菜的出菜心理學與菜尾湯背後「惜食愛物」的宗族美德；最後探討夜市小吃登上米其林必比登的文化自信與當代轉身。
+  - 語音節奏：生動風趣、充滿對話感、富有民間人情味與知性幽默。
+
+## 二、 歷史視覺插畫提示詞（Prompt Engineering）
+
+### 1. 橫幅主視覺：封街辦桌、紅色棚架與大灶火光（Hero Banner）
+- **Prompt**:
+  "Cinematic historical documentary illustration of a 1970s Taiwanese outdoor roadside banquet (辦桌 Bandoh) at dusk. A long asphalt village road transformed into a festive open-air feast under vibrant red and white waterproof canvas marquees. In the foreground, an exquisitely detailed wooden banquet round table with a pink plastic cover, loaded with steaming feast dishes: an elaborate five-blessing cold platter, a glistening amber-glazed braised pork knuckle (大封肉) resting on golden bamboo shoots, and a bamboo steamer brimming with red crab sticky rice (紅蟳米糕) adorned with brilliant orange crab roe. In the background, an energetic master chef (總鋪師) in a red undershirt skillfully tossing a massive iron wok over a roaring white-iron stove with dramatic blue and orange flames, surrounded by steam and bustling helpers. Photorealistic oil painting aesthetic, nostalgic warm festival glow, rich textures, 8k resolution, cinematic masterpiece --ar 16:9"
+
+### 2. 歷史工藝：夜市鐵板蚵仔煎與滾油鹽酥雞（Night Market Craft）
+- **Prompt**:
+  "Atmospheric 1970s Taiwan night market food stall split composition. On one side, a sizzling heavy cast-iron flat top where a vendor is frying oyster omelets (蚵仔煎): sweet potato starch batter crisping into golden lace edges, plump fresh oysters bursting, and a vibrant cracked egg yolk spreading into steam. On the other side, an open deep fryer bubbling with golden-brown Taiwanese popcorn chicken (鹽酥雞), fresh green Thai basil leaves crackling in the hot oil, aromatic vapor rising under warm tungsten hanging bulb and retro street signs. Vintage film tones, bustling night crowd in background, golden hour lighting, deep shadows, photorealistic oil painting, 8k, masterpiece --ar 16:9"
