@@ -343,7 +343,9 @@ const TAIWAN_FOOD_DATA = [
     },
     "figures": ["珍珠奶茶", "泡沫紅茶", "樹薯粉圓", "封口機", "全球手搖茶供應鏈"],
     "summary": "將臺灣傳統粉圓丟入冰鎮奶茶的那一刻起，一場席捲東京、紐約、巴黎的黑色珍珠風暴，打造出跨國手搖茶的商業奇蹟。",
-    "status": "planned",
+    "status": "published",
+      "videoId": "qcUf-uoSjUU",
+      "podcastId": "pSRPr2HkYtw",
     "file": "第14章_吸管裡的黑色奇蹟_春水堂翰林與珍珠奶茶席捲全球百億美元的商業神話.md",
     "videoSchedule": "2026-11-26 17:30",
     "podcastSchedule": "2026-11-26 19:30"

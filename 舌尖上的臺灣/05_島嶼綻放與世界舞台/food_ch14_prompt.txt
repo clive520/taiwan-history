@@ -1,0 +1,21 @@
+# 《舌尖上的臺灣》第 14 章：吸管裡的黑色奇蹟——視覺生成與影音提示詞庫
+
+## 一、 NotebookLM 影音生成設定規範
+- **語言模式**：必須明確指定 `language: "zh-TW"`（繁體中文）。
+- **說明短片（Video Overview）**：
+  - 核心主線：聚焦 1983 年臺中四維街陽羨茶行劉漢介以調酒雪克杯打破「茶只喝熱的」千年禁忌，引發泡沫紅茶微氣泡包裹兒茶素的感官革命；春水堂林秀慧與翰林茶館涂宗和的珍珠奶茶發明公案與智財法院「全體臺灣人集體文化資產」世紀判決；臺灣特有工業革命：益芳桌上型自動封口機 0.8 秒熱熔技術解決機車外送翻覆痛點、45度斜口粗吸管應力集中破膜與雙相流體力學；樹薯粉圓（Tapioca）85°C糊化、冷水激冷熱收縮塑造雙層梯度Q度、黑糖蜜漬滲透壓與4小時老化回生時效；以及手搖茶出海四次浪潮、臺灣精密機械與原物料供應鏈全球壟斷。
+  - 語音風格：熱情生動、知性明快、富有現代科技感與臺灣人情味、兼具硬核食品分子科學與全球商業脈絡。
+- **播客長片（Audio Deep Dive）**：
+  - 角色設定：兩位資深文化史學者、飲食人類學家與產業觀察家展開深度風趣對談。
+  - 對話深度：從日本澀谷「タピる」流行語、巴黎羅浮宮與紐約時代廣場排隊狂潮切入；深度解構臺灣如何將一片古老的苦澀樹葉改造為跨國百億美元普普符號；詳論益芳封口機如何讓三坪外帶店單日狂賣千杯；揭秘樹薯粉圓「Q」字背後的流變學儲能模量與黑糖高滲透壓；最後昇華至臺灣人在全球化浪潮中以柔克剛的「吸管外交」與島嶼文化自信。
+  - 語音節奏：生動風趣、充滿對話感與笑聲、富有知性深度與生活煙火氣。
+
+## 二、 歷史視覺插畫提示詞（Prompt Engineering）
+
+### 1. 橫幅主視覺：茶行吧檯、雪克杯與黑珍珠奶茶（Hero Banner）
+- **Prompt**:
+  "Cinematic documentary illustration of a 1980s Taiwanese tea salon in Taichung. On a polished dark wooden bar counter, an artisan tea master is vigorously shaking a condensation-covered stainless steel cocktail shaker, ice clinking, with soft warm morning light streaming through traditional wooden lattice windows. In the foreground, a large, crystal-clear glass mug filled with rich amber-golden iced milk tea, topped with a thick layer of velvet-smooth white foam, and a generous layer of gleaming, translucent black tapioca pearls (Boba) settling at the bottom. A vintage yellow wide straw pierced through a sealed plastic cup nearby. Nostalgic classical realism oil painting style, rich textures, warm amber and cream tones, 8k resolution, cinematic masterpiece --ar 16:9"
+
+### 2. 歷史工藝：大鐵鍋煮粉圓、黑糖蜜漬與自動封口機（Bubble Tea Craft）
+- **Prompt**:
+  "Atmospheric retro split composition of Taiwanese bubble tea craftsmanship. On the left side, a steaming large stainless steel pot where boiling water and freshly cooked, glossy black tapioca pearls are being stirred with a wooden paddle, deep brown Muscovado brown sugar syrup glistening with rich caramelized textures. On the right side, a vintage Taiwanese desktop microcomputer automatic cup sealing machine in action, heat-sealing film onto a plastic cup with a soft warm glow, a retro tea stall background with neat syrup dispensers and shaker tins. Highly detailed, warm tungsten lighting, steam rising, photorealistic oil painting aesthetic, 8k resolution --ar 16:9"
