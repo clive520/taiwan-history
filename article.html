@@ -218,6 +218,7 @@
 
   <script src="js/data-history.js"></script>
   <script src="js/data-food.js"></script>
+  <script src="js/data-railway.js"></script>
   <script>
     lucide.createIcons();
 
@@ -241,32 +242,48 @@
       let filePath = fileParam;
       let matchedTopic = null;
       let isFood = (seriesParam === 'food') || (fileParam && (fileParam.includes('舌尖上的臺灣') || fileParam.includes('food')));
+      let isRailway = (seriesParam === 'railway') || (fileParam && (fileParam.includes('島嶼鐵道物語') || fileParam.includes('railway'))) || (idParam && idParam.startsWith('rail_'));
 
       const historyData = typeof TAIWAN_HISTORY_DATA !== 'undefined' ? TAIWAN_HISTORY_DATA : [];
       const foodData = typeof TAIWAN_FOOD_DATA !== 'undefined' ? TAIWAN_FOOD_DATA : [];
+      const railwayData = typeof TAIWAN_RAILWAY_DATA !== 'undefined' ? TAIWAN_RAILWAY_DATA : [];
 
-      if (isFood) {
+      if (isRailway) {
+        if (idParam && railwayData.length > 0) {
+          matchedTopic = railwayData.find(t => t.id === idParam);
+        } else if (fileParam && railwayData.length > 0) {
+          matchedTopic = railwayData.find(t => `${t.periodFolder}/${t.file}` === filePath || t.file === filePath || filePath.endsWith(t.file));
+        }
+      } else if (isFood) {
         if (idParam && foodData.length > 0) {
           matchedTopic = foodData.find(t => t.id === idParam);
         } else if (fileParam && foodData.length > 0) {
-          matchedTopic = foodData.find(t => `${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam);
+          matchedTopic = foodData.find(t => `${t.periodFolder}/${t.file}` === filePath || t.file === filePath || filePath.endsWith(t.file));
         }
       } else {
         if (idParam && historyData.length > 0) {
           matchedTopic = historyData.find(t => t.id === idParam);
         } else if (fileParam && historyData.length > 0) {
-          matchedTopic = historyData.find(t => `${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam);
+          matchedTopic = historyData.find(t => `${t.periodFolder}/${t.file}` === filePath || t.file === filePath || filePath.endsWith(t.file));
         }
       }
 
-      // 若指定資料庫沒找到，且未強制指定 seriesParam，嘗試在另一個資料庫找
+      // 若指定資料庫沒找到，且未強制指定 seriesParam，嘗試在其他資料庫找
       if (!matchedTopic && !seriesParam) {
-        if (!isFood && foodData.length > 0) {
-          matchedTopic = foodData.find(t => (idParam && t.id === idParam) || (fileParam && (`${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam)));
+        if (railwayData.length > 0) {
+          matchedTopic = railwayData.find(t => (idParam && t.id === idParam) || (fileParam && (`${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam || fileParam.endsWith(t.file))));
+          if (matchedTopic) isRailway = true;
+        }
+        if (!matchedTopic && foodData.length > 0) {
+          matchedTopic = foodData.find(t => (idParam && t.id === idParam) || (fileParam && (`${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam || fileParam.endsWith(t.file))));
           if (matchedTopic) isFood = true;
-        } else if (isFood && historyData.length > 0) {
-          matchedTopic = historyData.find(t => (idParam && t.id === idParam) || (fileParam && (`${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam)));
-          if (matchedTopic) isFood = false;
+        }
+        if (!matchedTopic && historyData.length > 0) {
+          matchedTopic = historyData.find(t => (idParam && t.id === idParam) || (fileParam && (`${t.periodFolder}/${t.file}` === fileParam || t.file === fileParam || fileParam.endsWith(t.file))));
+          if (matchedTopic) {
+            isFood = false;
+            isRailway = false;
+          }
         }
       }
 
@@ -280,7 +297,26 @@
       const seriesBreadcrumb = document.getElementById('seriesBreadcrumb');
       const footerBrand = document.getElementById('footerBrand');
 
-      if (isFood) {
+      if (isRailway) {
+        if (topBackBtn) {
+          topBackBtn.href = 'railway.html';
+          topBackBtn.className = 'flex items-center space-x-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors';
+          topBackBtn.querySelector('span').textContent = '返回《島嶼鐵道物語》目錄';
+        }
+        if (bottomBackBtn) {
+          bottomBackBtn.href = 'railway.html';
+          bottomBackBtn.className = 'flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600';
+          bottomBackBtn.innerHTML = '<i data-lucide="chevron-left" class="w-4 h-4"></i> 回到《島嶼鐵道物語》專題清單';
+        }
+        if (seriesBreadcrumb) {
+          seriesBreadcrumb.href = 'railway.html';
+          seriesBreadcrumb.textContent = '島嶼鐵道物語';
+          seriesBreadcrumb.className = 'hover:text-indigo-600 font-medium';
+        }
+        if (footerBrand) {
+          footerBrand.innerHTML = '島嶼鐵道物語專題寫作與數位文庫 &copy; 2026 &bull; Project IronVeins';
+        }
+      } else if (isFood) {
         if (topBackBtn) {
           topBackBtn.href = 'food.html';
           topBackBtn.className = 'flex items-center space-x-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-amber-600 dark:hover:text-amber-400 transition-colors';
@@ -328,10 +364,10 @@
       if (matchedTopic) {
         document.getElementById('breadcrumbCategory').textContent = matchedTopic.periodName;
         document.getElementById('breadcrumbTitle').textContent = matchedTopic.title;
-        document.title = `${matchedTopic.title} | ${isFood ? '舌尖上的臺灣' : '臺灣史'}數位文庫`;
+        document.title = `${matchedTopic.title} | ${isRailway ? '島嶼鐵道物語' : (isFood ? '舌尖上的臺灣' : '臺灣史')}數位文庫`;
 
         // 檢查多媒體影音與精裝封面配置
-        setupMediaPlayers(matchedTopic, isFood);
+        setupMediaPlayers(matchedTopic, isFood || isRailway);
       } else {
         const parts = filePath.split('/');
         document.getElementById('breadcrumbTitle').textContent = parts[parts.length - 1].replace('.md', '');

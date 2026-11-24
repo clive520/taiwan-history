@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>島嶼鐵道物語 | 穿透山海的鋼軌、站驛與百年時空壓縮史詩</title>
+  <meta name="description" content="從清代劉銘傳獅球嶺隧道騰雲號、日治縱貫鐵道全通與折返式登山林鐵，到糖鐵平溪黑金、花東拓寬、南迴天險與高鐵一日生活圈。以鋼軌為動脈，見證臺灣百年時空壓縮史詩。">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-indigo-50/30 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- 頂部導航列 -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-indigo-200/50 dark:border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="flex items-center space-x-2.5 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-700 via-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+            <i data-lucide="train" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-indigo-950 via-indigo-900 to-blue-800 dark:from-indigo-200 dark:to-blue-300 bg-clip-text text-transparent">島嶼鐵道物語</span>
+              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-300/60 dark:border-indigo-800/60">15章旗艦</span>
+            </div>
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono -mt-0.5">Project IronVeins</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- 全系列切換標籤 (Desktop) -->
+      <nav class="hidden lg:flex items-center space-x-1 bg-slate-200/70 dark:bg-slate-800/70 p-1 rounded-xl text-xs font-medium">
+        <a href="index.html" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+          <i data-lucide="home" class="w-3.5 h-3.5"></i>
+          <span>總門戶</span>
+        </a>
+        <a href="history.html" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all">
+          <i data-lucide="book-marked" class="w-3.5 h-3.5"></i>
+          <span>臺灣史全卷</span>
+        </a>
+        <a href="food.html" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 transition-all">
+          <i data-lucide="utensils" class="w-3.5 h-3.5"></i>
+          <span>舌尖上的臺灣</span>
+        </a>
+        <a href="railway.html" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-indigo-700 to-blue-600 text-white shadow-sm font-semibold">
+          <i data-lucide="train" class="w-3.5 h-3.5"></i>
+          <span>島嶼鐵道物語</span>
+        </a>
+      </nav>
+
+      <!-- 視角切換器 (Tab Switcher) -->
+      <div class="hidden md:flex items-center bg-indigo-100/70 dark:bg-slate-800/70 p-1 rounded-xl text-xs font-medium border border-indigo-200/40 dark:border-slate-700/60">
+        <button id="viewGridBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 text-indigo-900 dark:text-indigo-200 shadow-sm transition-all font-semibold">
+          <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+          <span>鐵道路網目錄</span>
+        </button>
+        <button id="viewTimelineBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-indigo-800 dark:hover:text-white transition-all">
+          <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+          <span>百年時空軸</span>
+        </button>
+        <button id="viewMapBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-indigo-800 dark:hover:text-white transition-all">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+          <span>全島時空地圖</span>
+        </button>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button id="themeToggle" aria-label="切換深淺模式" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-indigo-100 dark:hover:bg-slate-800 transition-colors">
+          <i data-lucide="moon" class="w-5 h-5 dark:hidden"></i>
+          <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+        </button>
+
+        <a href="https://github.com/clive520/taiwan-history" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-slate-700 dark:text-slate-200 bg-indigo-100/80 hover:bg-indigo-200/80 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span class="hidden sm:inline">GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 手機版大系切換列 -->
+  <div class="lg:hidden flex items-center justify-around bg-slate-200/90 dark:bg-slate-800/90 border-b border-slate-300 dark:border-slate-700 px-3 py-1.5 text-xs font-medium">
+    <a href="index.html" class="flex items-center gap-1 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+      <i data-lucide="home" class="w-3.5 h-3.5"></i> 總門戶
+    </a>
+    <span class="text-slate-300 dark:text-slate-600">|</span>
+    <a href="history.html" class="text-slate-600 dark:text-slate-400 hover:text-emerald-600 flex items-center gap-1">
+      <i data-lucide="book-marked" class="w-3.5 h-3.5"></i> 臺灣史
+    </a>
+    <span class="text-slate-300 dark:text-slate-600">|</span>
+    <a href="food.html" class="text-slate-600 dark:text-slate-400 hover:text-amber-600 flex items-center gap-1">
+      <i data-lucide="utensils" class="w-3.5 h-3.5"></i> 舌尖上的臺灣
+    </a>
+    <span class="text-slate-300 dark:text-slate-600">|</span>
+    <a href="railway.html" class="font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+      <i data-lucide="train" class="w-3.5 h-3.5"></i> 島嶼鐵道
+    </a>
+  </div>
+
+  <!-- 手機版視角切換器 -->
+  <div class="md:hidden flex items-center justify-around bg-indigo-50/80 dark:bg-slate-900 border-b border-indigo-200/60 dark:border-slate-800 p-2 text-xs font-medium sticky top-16 z-40">
+    <button id="mobileViewGridBtn" class="flex items-center space-x-1 py-1.5 px-3 rounded-lg bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 font-bold shadow-sm">
+      <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+      <span>目錄</span>
+    </button>
+    <button id="mobileViewTimelineBtn" class="flex items-center space-x-1 py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400">
+      <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+      <span>時空軸</span>
+    </button>
+    <button id="mobileViewMapBtn" class="flex items-center space-x-1 py-1.5 px-3 rounded-lg text-slate-600 dark:text-slate-400">
+      <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+      <span>鐵道地圖</span>
+    </button>
+  </div>
+
+  <!-- Hero 英雄區 -->
+  <section class="relative py-12 md:py-16 overflow-hidden bg-gradient-to-b from-indigo-100/50 via-blue-50/20 to-transparent dark:from-indigo-950/20 dark:via-transparent dark:to-transparent">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 dark:bg-indigo-950/80 text-indigo-800 dark:text-indigo-300 text-xs font-medium mb-4 border border-indigo-300/50 dark:border-indigo-800/50 shadow-sm">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400"></i>
+        <span>臺灣文史大系 &bull; 百年鐵道時空壓縮史詩</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-4">
+        島嶼鐵道物語：<span class="bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-800 bg-clip-text text-transparent">穿透山海的鋼軌、站驛與時空革命</span>
+      </h1>
+      <p class="max-w-2xl mx-auto text-sm sm:text-base text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
+        從清代劉銘傳獅球嶺隧道艱難初啼、長谷川謹介全島縱貫線貫通，到阿里山登山奇蹟、平溪黑金、花東窄軌拓寬與高鐵一日生活圈。鋼軌不僅穿透崇山峻嶺，更深刻重塑了臺灣百年間的空間秩序與共同體記憶。
+      </p>
+
+      <!-- 統計數據徽章 -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto">
+        <div class="p-3 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-indigo-200/60 dark:border-slate-800 shadow-sm backdrop-blur">
+          <div class="text-2xl font-black text-indigo-600 dark:text-indigo-400">15</div>
+          <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">經典鐵道長卷</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-indigo-200/60 dark:border-slate-800 shadow-sm backdrop-blur">
+          <div class="text-2xl font-black text-blue-600 dark:text-blue-400">4</div>
+          <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">歷史巨變篇章</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-indigo-200/60 dark:border-slate-800 shadow-sm backdrop-blur">
+          <div class="text-2xl font-black text-indigo-700 dark:text-indigo-300">100+</div>
+          <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">年時空壓縮縱深</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white/70 dark:bg-slate-900/70 border border-indigo-200/60 dark:border-slate-800 shadow-sm backdrop-blur">
+          <div class="text-2xl font-black text-indigo-500">4K & 播客</div>
+          <div class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">雙規格多媒體對應</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主要互動內容區 -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+    
+    <!-- 篩選與搜尋列 -->
+    <div class="mb-8 space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        
+        <!-- 時期分類 Tabs -->
+        <div class="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none" id="periodTabs">
+          <!-- 由 JS 動態生成 -->
+        </div>
+
+        <!-- 搜尋框 -->
+        <div class="relative w-full md:w-72 shrink-0">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="搜尋車站、車型或鐵道線路..." 
+            class="w-full pl-9 pr-8 py-2 text-xs rounded-xl bg-white dark:bg-slate-900 border border-indigo-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition-all shadow-sm"
+          >
+          <button id="clearSearch" class="hidden absolute right-2.5 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600">
+            <i data-lucide="x" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 狀態提示 -->
+      <div class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-1">
+        <span id="resultsCount">載入中...</span>
+        <div class="flex items-center gap-3">
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-indigo-500"></span> 專題長文</span>
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500"></span> YouTube 影片</span>
+          <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-500"></span> 深度對談播客</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 視圖一：章節卡片網格 -->
+    <section id="gridSection">
+      <div id="chaptersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 由 JS 動態渲染卡片 -->
+      </div>
+    </section>
+
+    <!-- 視圖二：百年時空軸 -->
+    <section id="timelineSection" class="hidden">
+      <div class="relative max-w-4xl mx-auto py-6" id="timelineContainer">
+        <!-- 垂直時間軸主線 -->
+        <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-indigo-200 dark:bg-indigo-900/60 transform md:-translate-x-1/2"></div>
+        <div id="timelineList" class="space-y-8"></div>
+      </div>
+    </section>
+
+    <!-- 視圖三：全島鐵道時空地圖 -->
+    <section id="mapSection" class="hidden">
+      <div class="text-center mb-6">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">臺灣百年鐵道路網與重要站驛時空地圖</h2>
+        <p class="text-sm text-slate-500">點擊地圖上的各鐵道坐標，探索工程奇蹟、歷史老站與時代脈動現場</p>
+      </div>
+      <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-indigo-200/80 dark:border-slate-800 shadow-sm">
+        <div id="mapContainer" class="h-[550px] w-full rounded-xl"></div>
+      </div>
+    </section>
+
+    <!-- 空搜尋狀態 -->
+    <div id="emptyState" class="hidden text-center py-16">
+      <div class="w-16 h-16 rounded-full bg-indigo-50 dark:bg-slate-800 text-indigo-500 flex items-center justify-center mx-auto mb-4">
+        <i data-lucide="search-x" class="w-8 h-8"></i>
+      </div>
+      <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-1">找不到相符的鐵道專題</h3>
+      <p class="text-sm text-slate-500 dark:text-slate-400">請嘗試更換關鍵字（如：騰雲號、扇形車庫、阿里山、光華號、高鐵）或重設分期</p>
+    </div>
+  </main>
+
+  <!-- 頁腳 -->
+  <footer class="border-t border-indigo-200/60 dark:border-slate-800/80 bg-white/50 dark:bg-slate-900/50 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex items-center space-x-2">
+        <i data-lucide="train" class="w-4 h-4 text-indigo-500"></i>
+        <span>島嶼鐵道物語專題寫作與數位文庫 &copy; 2026 &bull; Project IronVeins</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="index.html" class="hover:text-indigo-500 transition-colors">文庫總門戶</a>
+        <span>&bull;</span>
+        <a href="history.html" class="hover:text-emerald-500 transition-colors">臺灣史全卷</a>
+        <span>&bull;</span>
+        <a href="food.html" class="hover:text-amber-500 transition-colors">舌尖上的臺灣</a>
+        <span>&bull;</span>
+        <a href="article.html?series=railway&file=島嶼鐵道物語/00_專案計畫與規範/島嶼鐵道物語專題寫作與數位文庫計畫書.md" class="hover:text-indigo-500 transition-colors">查看鐵道計畫書</a>
+        <span>&bull;</span>
+        <a href="https://github.com/clive520/taiwan-history" target="_blank" class="hover:text-indigo-500 transition-colors">GitHub 開源專案</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/data-railway.js"></script>
+  <script src="js/railway-app.js"></script>
+</body>
+</html>
